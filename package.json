@@ -29,9 +29,7 @@
   },
   "main": "./lib/index.js",
   "scripts": {
-    "lint": "npm run lint-src && npm run lint-test",
-    "lint-src": "eslint server common",
-    "lint-test": "eslint test --global describe,it,beforeEach,afterEach",
+    "lint": "eslint .",
     "pretest": "#npm run lint",
     "test": "nyc mocha $npm_package_config_MOCHA_OPTS",
     "test:watch": "npm run test -- -w",
@@ -54,6 +52,7 @@
     "babel-preset-es2015": "latest",
     "chai": "latest",
     "coveralls": "latest",
+    "debug": "^2.2.0",
     "esformatter": "0.8.1",
     "esformatter-braces": "1.2.1",
     "esformatter-collapse-objects": "0.5.1",

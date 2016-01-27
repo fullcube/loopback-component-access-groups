@@ -5,11 +5,14 @@
   "options": {
     "validateUpsert": true
   },
+  "mixins": {
+    "Utils": true
+  },
   "properties": {
     "id": {
       "type": "string",
-      "required": true,
-      "id": true
+      "id": true,
+      "required": true
     }
   },
   "validations": [],
@@ -59,8 +62,5 @@
       "property": "create"
     }
   ],
-  "methods": {},
-  "mixins": {
-    "Utils": true
-  }
+  "methods": {}
 }

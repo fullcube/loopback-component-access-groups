@@ -3,11 +3,12 @@
     "loopback#favicon": {},
     "loopback#context": {},
     "loopback#token": {
-      "params": ["state"]
+      "params": [
+        "state"
+      ]
     },
     "../../../../lib/middleware/user-context": {}
   },
-  "initial": {},
   "session": {},
   "auth": {},
   "parse": {},

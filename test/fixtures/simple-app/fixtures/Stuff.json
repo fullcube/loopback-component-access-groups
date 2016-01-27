@@ -1,3 +1,5 @@
 {
-  "name": "Widget 1"
+  "id": "1",
+  "name": "Widget 1",
+  "programId": "A"
 }
