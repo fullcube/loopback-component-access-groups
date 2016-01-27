@@ -1,5 +1,5 @@
 {
-  "extends": ['fullcube/mocha' ],
+  "extends": 'fullcube/mocha',
   "rules": {
     "global-require": 0
   }
