@@ -1,0 +1,42 @@
+{
+  "_meta": {
+    "sources": [
+      "../common/models"
+    ],
+    "mixins": [
+      "../../../../"
+    ]
+  },
+  "AccessToken": {
+    "dataSource": "db",
+    "public": true
+  },
+  "ACL": {
+    "dataSource": "db",
+    "public": true
+  },
+  "RoleMapping": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Role": {
+    "dataSource": "db",
+    "public": true
+  },
+  "user": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Program": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Team": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Stuff": {
+    "dataSource": "db",
+    "public": true
+  }
+}

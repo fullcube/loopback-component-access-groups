@@ -1,0 +1,52 @@
+{
+  "plugins": [
+    "esformatter-braces",
+    "esformatter-collapse-objects",
+    "esformatter-dot-notation",
+    "esformatter-eol-last",
+    "esformatter-literal-notation",
+    "esformatter-semicolons",
+    "esformatter-quotes",
+    "esformatter-quote-props",
+    "esformatter-literal-notation",
+    "esformatter-remove-trailing-commas",
+    "esformatter-use-strict",
+    "unquoted-property-validator"
+  ],
+  "quotes": {
+    "type": "single",
+    "avoidEscape": false
+  },
+  "lineBreak": {
+    "before": {
+      "ElseIfStatement": 1,
+      "ElseStatement": 1,
+      "VariableDeclaration": 1,
+      "TryClosingBrace" : 1,
+      "FunctionDeclarationClosingBrace" : 1,
+      "FunctionExpressionClosingBrace": 1,
+      "ArrowFunctionExpressionClosingBrace": 1
+    },
+    "after": {
+      "IfStatementOpeningBrace": 1,
+      "VariableDeclarationSemiColon": 2,
+      "TryClosingBrace" : 1,
+      "FunctionDeclarationOpeningBrace" : 1,
+      "FunctionExpressionOpeningBrace": 1,
+      "ArrowFunctionExpressionOpeningBrace": 1
+    }
+  },
+  "whiteSpace" : {
+    "before": {
+      "ArrayExpressionClosing": 1,
+      "ObjectExpressionClosingBrace": 1,
+      "PropertyName": 1
+    },
+    "after": {
+      "ArrayExpressionOpening": 1,
+      "ArrayPatternOpening": 1,
+      "ObjectExpressionOpeningBrace": 1,
+      "FunctionName": 0
+    }
+  }
+}

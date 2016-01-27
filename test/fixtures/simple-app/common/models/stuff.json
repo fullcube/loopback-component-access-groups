@@ -1,0 +1,34 @@
+{
+  "name": "Stuff",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "Program": {
+      "type": "hasOne",
+      "model": "Program",
+      "foreignKey": "programId"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "userFromAnotherProgram",
+      "permission": "DENY"
+    }
+  ],
+  "methods": {},
+  "mixins": {
+    "Utils": true
+  }
+}

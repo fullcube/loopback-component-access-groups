@@ -1,0 +1,1 @@
+loopback-component-access

@@ -1,0 +1,36 @@
+[{
+  "id": "admin",
+	"username": "admin",
+	"email": "admin@fullcube.com",
+	"password": "password"
+}, {
+  "id": "programAdminA",
+	"username": "programAdminA",
+	"email": "programAdminA@fullcube.com",
+	"password": "password"
+}, {
+  "id": "programManagerA",
+	"username": "programManagerA",
+	"email": "programManagerA1@fullcube.com",
+	"password": "password"
+}, {
+  "id": "programUserA",
+	"username": "programUserA",
+	"email": "programManagerA2@fullcube.com",
+	"password": "password"
+}, {
+  "id": "programAdminB",
+	"username": "programAdminB",
+	"email": "programAdminB@fullcube.com",
+	"password": "password"
+}, {
+  "id": "programManagerB",
+	"username": "programManagerB",
+	"email": "programManagerB1@fullcube.com",
+	"password": "password"
+}, {
+  "id": "programUserB",
+	"username": "programUserB",
+	"email": "programManagerB2@fullcube.com",
+	"password": "password"
+}]

@@ -1,0 +1,88 @@
+{
+  "name": "loopback-component-access",
+  "description": "Access controls for Loopback.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Tom Kirkpatrick @mrfelton"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fullcube/loopback-component-access.git"
+  },
+  "keywords": [
+    "loopback",
+    "strongloop",
+    "access"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fullcube/loopback-component-access/issues"
+  },
+  "homepage": "https://github.com/fullcube/loopback-component-access",
+  "files": [
+    "lib",
+    "test"
+  ],
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "main": "./lib/index.js",
+  "scripts": {
+    "lint": "npm run lint-src && npm run lint-test",
+    "lint-src": "eslint server common",
+    "lint-test": "eslint test --global describe,it,beforeEach,afterEach",
+    "pretest": "#npm run lint",
+    "test": "nyc mocha $npm_package_config_MOCHA_OPTS",
+    "test:watch": "npm run test -- -w",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "outdated": "npm outdated --depth=0",
+    "todo": "./node_modules/.bin/leasot src/common/**/*.js src/server/**/*.js src/server/**/*.js -r markdown > TODO.md || echo Refreshed TODO.md."
+  },
+  "dependencies": {
+    "bluebird": "3.1.5",
+    "debug": "^2.2.0",
+    "lodash": "4.0.1"
+  },
+  "peerDependencies": {
+    "loopback": ">=2.25.0"
+  },
+  "optionalDependencies": {
+    "loopback-component-explorer": "2.2.0"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "latest",
+    "chai": "latest",
+    "coveralls": "latest",
+    "esformatter": "0.8.1",
+    "esformatter-braces": "1.2.1",
+    "esformatter-collapse-objects": "0.5.1",
+    "esformatter-dot-notation": "^1.3.1",
+    "esformatter-eol-last": "^1.0.0",
+    "esformatter-literal-notation": "^1.0.1",
+    "esformatter-quote-props": "1.0.2",
+    "esformatter-quotes": "1.0.3",
+    "esformatter-remove-trailing-commas": "1.0.1",
+    "esformatter-semicolons": "1.1.2",
+    "esformatter-use-strict": "2.0.2",
+    "eslint": "^1.10.3",
+    "eslint-config-fullcube": "https://github.com/fullcube/eslint-config-fullcube/tarball/master",
+    "eslint-config-strict": "^7.0.4",
+    "isparta": "latest",
+    "leasot": "3.1.2",
+    "loopback-boot": "^2.16.0",
+    "loopback-component-fixtures": "0.0.6",
+    "loopback-testing": "latest",
+    "mocha": "latest",
+    "mocha-sinon": "latest",
+    "nyc": "latest",
+    "sinon": "latest",
+    "sinon-chai": "latest",
+    "unquoted-property-validator": "^1.0.0"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  }
+}

@@ -1,0 +1,7 @@
+{
+  'extends': 'fullcube',
+  'root': true,
+  'rules': {
+    no-console: 0
+  }
+}

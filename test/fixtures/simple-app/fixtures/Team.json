@@ -1,0 +1,25 @@
+[{
+	"programId": "A",
+	"userId": "programAdminA",
+	"role": "programAdmin"
+}, {
+	"programId": "A",
+	"userId": "programManagerA",
+	"role": "programManager"
+}, {
+	"programId": "A",
+	"userId": "programUserA",
+	"role": "programUser"
+}, {
+	"programId": "B",
+	"userId": "programAdminB",
+	"role": "programAdmin"
+}, {
+	"programId": "B",
+	"userId": "programManagerB",
+	"role": "programManager"
+}, {
+	"programId": "B",
+	"userId": "programUserB",
+	"role": "programUser"
+}]

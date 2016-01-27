@@ -1,0 +1,6 @@
+{
+  "extends": ['fullcube/mocha' ],
+  "rules": {
+    "global-require": 0
+  }
+}
