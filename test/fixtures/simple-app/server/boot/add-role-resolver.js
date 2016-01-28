@@ -2,7 +2,7 @@ const path = require('path');
 const fileName = path.basename(__filename, '.js');
 const debug = require('debug')(`server:boot:${fileName}`);
 
-module.exports = function(app) {
+module.exports = function(app, next) {
   const Role = app.models.Role;
   const Team = app.models.Team;
 
@@ -44,4 +44,6 @@ module.exports = function(app) {
       });
     });
   });
+
+  process.nextTick(next);
 };

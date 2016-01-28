@@ -30,8 +30,8 @@
   "main": "./lib/index.js",
   "scripts": {
     "lint": "eslint .",
-    "pretest": "#npm run lint",
-    "test": "nyc mocha $npm_package_config_MOCHA_OPTS",
+    "pretest": "npm run lint",
+    "test": "nyc mocha $npm_package_config_MOCHA_OPTS test/*test.js",
     "test:watch": "npm run test -- -w",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "outdated": "npm outdated --depth=0",
@@ -53,6 +53,7 @@
     "chai": "latest",
     "coveralls": "latest",
     "debug": "^2.2.0",
+    "dirty-chai": "^1.2.2",
     "esformatter": "0.8.1",
     "esformatter-braces": "1.2.1",
     "esformatter-collapse-objects": "0.5.1",

@@ -4,8 +4,8 @@ const path = require('path');
 const request = require('supertest-as-promised');
 const chai = require('chai');
 const expect = chai.expect;
-const assert = require('assert');
 
+chai.use(require('dirty-chai'));
 chai.use(require('sinon-chai'));
 require('mocha-sinon');
 
@@ -19,17 +19,7 @@ function json(verb, url) {
     .expect('Content-Type', /json/);
 }
 
-describe('REST API request', () => {
-  // before(function(done) {
-  //   require('./start-server');
-  //   done();
-  // });
-
-  after(function() {
-    app.removeAllListeners('started');
-    app.removeAllListeners('loaded');
-  });
-
+describe('REST API request', function() {
   it('should not allow access without access token', function() {
     return json('get', '/api/stuff')
       .expect(401);
@@ -42,25 +32,19 @@ describe('REST API request', () => {
       .send({ username: 'programAdminA', password: 'password' })
       .expect(200)
       .then(res => {
-        assert(typeof res.body === 'object');
-        assert(res.body.id, 'must have an access token');
-        assert.equal(res.body.userId, 'programAdminA');
+        expect(res.body).to.be.an('object');
+        expect(res.body.id).to.exist();
+        expect(res.body.userId).to.equal('programAdminA');
         accessToken = res.body.id;
       })
       .then(() => json('get', `/api/stuff/1?access_token=${accessToken}`).expect(200))
       .then(res => {
         const stuff = res.body;
 
-        assert(typeof stuff === 'object');
-        assert.equal(stuff.name, 'Widget 1');
+        expect(stuff).to.be.an('object');
+        expect(stuff).to.have.property('name', 'Widget 1');
       });
   });
-
-  it('should not allow access without access tokenshoul', function() {
-    return json('get', '/api/stuff')
-      .expect(401);
-  });
-
 });
 
 describe('Unexpected Usage', () => {
