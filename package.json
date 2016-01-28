@@ -51,6 +51,7 @@
   "devDependencies": {
     "babel-preset-es2015": "latest",
     "chai": "latest",
+    "chai-tbd": "^0.1.0",
     "coveralls": "latest",
     "debug": "^2.2.0",
     "dirty-chai": "^1.2.2",
