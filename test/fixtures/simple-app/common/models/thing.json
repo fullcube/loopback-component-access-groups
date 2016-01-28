@@ -54,11 +54,10 @@
       "property": "updateAttributes"
     },
     {
-      "accessType": "WRITE",
+      "accessType": "*",
       "principalType": "ROLE",
       "principalId": "$group:admin",
-      "permission": "ALLOW",
-      "property": "destroyById"
+      "permission": "ALLOW"
     }
   ],
   "methods": {}
