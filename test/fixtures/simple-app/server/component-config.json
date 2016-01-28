@@ -6,5 +6,6 @@
     "loadFixturesOnStartup": true,
     "environments": [ "development", "test" ],
     "fixturesPath": "/test/fixtures/simple-app/fixtures/"
-  }
+  },
+  "../../../../lib": {}
 }
