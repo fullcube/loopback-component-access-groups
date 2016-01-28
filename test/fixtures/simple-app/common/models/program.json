@@ -42,14 +42,14 @@
     {
       "accessType": "READ",
       "principalType": "ROLE",
-      "principalId": "teamMember",
+      "principalId": "$group:member",
       "permission": "ALLOW",
       "property": "listPrograms"
     },
     {
       "accessType": "READ",
       "principalType": "ROLE",
-      "principalId": "teamMember",
+      "principalId": "$group:member",
       "permission": "ALLOW",
       "property": "findById"
     },

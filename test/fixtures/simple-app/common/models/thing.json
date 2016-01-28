@@ -36,27 +36,27 @@
     {
       "accessType": "READ",
       "principalType": "ROLE",
-      "principalId": "groupMember",
+      "principalId": "$group:member",
       "permission": "ALLOW"
     },
     {
       "accessType": "WRITE",
       "principalType": "ROLE",
-      "principalId": "groupMember",
+      "principalId": "$group:member",
       "permission": "ALLOW",
       "property": "create"
     },
     {
       "accessType": "WRITE",
       "principalType": "ROLE",
-      "principalId": "groupMember",
+      "principalId": "$group:member",
       "permission": "ALLOW",
       "property": "updateAttributes"
     },
     {
       "accessType": "WRITE",
       "principalType": "ROLE",
-      "principalId": "groupMember",
+      "principalId": "$group:member",
       "permission": "ALLOW",
       "property": "destroyById"
     }

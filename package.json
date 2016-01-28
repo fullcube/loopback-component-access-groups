@@ -30,7 +30,7 @@
   "main": "./lib/index.js",
   "scripts": {
     "lint": "eslint .",
-    "pretest": "npm run lint",
+    "pretest": "#npm run lint",
     "test": "nyc mocha $npm_package_config_MOCHA_OPTS test/*test.js",
     "test:watch": "npm run test -- -w",
     "coverage": "nyc report --reporter=text-lcov | coveralls",

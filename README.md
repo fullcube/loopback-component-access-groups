@@ -49,7 +49,7 @@ Options:
 **authenticated**  
   nothing
 
-**teamMember**  
+**$group:member**  
   create, read, update
 
 **teamAdmin**  
