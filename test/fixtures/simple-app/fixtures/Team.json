@@ -1,25 +1,25 @@
 [{
 	"programId": "A",
 	"userId": "programAdminA",
-	"role": "programAdmin"
+	"role": "admin"
 }, {
 	"programId": "A",
 	"userId": "programManagerA",
-	"role": "programManager"
+	"role": "manager"
 }, {
 	"programId": "A",
-	"userId": "programUserA",
-	"role": "programUser"
+	"userId": "programMemberA",
+	"role": "member"
 }, {
 	"programId": "B",
 	"userId": "programAdminB",
-	"role": "programAdmin"
+	"role": "admin"
 }, {
 	"programId": "B",
 	"userId": "programManagerB",
-	"role": "programManager"
+	"role": "manager"
 }, {
 	"programId": "B",
-	"userId": "programUserB",
-	"role": "programUser"
+	"userId": "programMemberB",
+	"role": "member"
 }]

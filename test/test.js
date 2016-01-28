@@ -37,9 +37,9 @@ describe('REST API', function() {
   describe('Role: athenticated', function() {
     it('should not allow access to a teams thing', function() {
       return json('post', '/api/users/login')
-        .send({ username: 'programAdminA', password: 'password' })
+        .send({ username: 'generalUser', password: 'password' })
         .expect(200)
-        .then(res => json('get', `/api/things/2?access_token=${res.body.id}`)
+        .then(res => json('get', `/api/things/1?access_token=${res.body.id}`)
         .expect(401));
     });
   });
@@ -47,7 +47,7 @@ describe('REST API', function() {
   describe('Role: team member', function() {
     it('should not allow getting another teams thing', function() {
       return json('post', '/api/users/login')
-        .send({ username: 'programAdminA', password: 'password' })
+        .send({ username: 'programMemberA', password: 'password' })
         .expect(200)
         .then(res => json('get', `/api/things/2?access_token=${res.body.id}`)
         .expect(401));
@@ -55,7 +55,7 @@ describe('REST API', function() {
 
     it('should create a teams thing', function() {
       return json('post', '/api/users/login')
-        .send({ username: 'programAdminA', password: 'password' })
+        .send({ username: 'programMemberA', password: 'password' })
         .expect(200)
         .then(res => json('post', `/api/things?access_token=${res.body.id}`, {
           programId: 'A',
@@ -70,7 +70,7 @@ describe('REST API', function() {
 
     it('should read a teams thing', function() {
       return json('post', '/api/users/login')
-        .send({ username: 'programAdminA', password: 'password' })
+        .send({ username: 'programMemberA', password: 'password' })
         .expect(200)
         .then(res => json('get', `/api/things/1?access_token=${res.body.id}`)
         .expect(200))
@@ -82,7 +82,7 @@ describe('REST API', function() {
 
     it('should update a teams thing', function() {
       return json('post', '/api/users/login')
-        .send({ username: 'programAdminA', password: 'password' })
+        .send({ username: 'programMemberA', password: 'password' })
         .expect(200)
         .then(res => json('put', `/api/things/1?access_token=${res.body.id}`)
         .expect(200))
@@ -94,7 +94,7 @@ describe('REST API', function() {
 
     it('should not delete a teams thing', function() {
       return json('post', '/api/users/login')
-        .send({ username: 'programAdminA', password: 'password' })
+        .send({ username: 'programMemberA', password: 'password' })
         .expect(200)
         .then(res => json('delete', `/api/things/1?access_token=${res.body.id}`)
         .expect(401));
