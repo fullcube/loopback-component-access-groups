@@ -40,7 +40,7 @@ describe('REST API', function() {
         .send({ username: 'generalUser', password: 'password' })
         .expect(200)
         .then(res => json('get', `/api/things/1?access_token=${res.body.id}`)
-        .expect(401));
+          .expect(401));
     });
   });
 
@@ -50,7 +50,7 @@ describe('REST API', function() {
         .send({ username: 'programMemberA', password: 'password' })
         .expect(200)
         .then(res => json('get', `/api/things/2?access_token=${res.body.id}`)
-        .expect(401));
+          .expect(401));
     });
 
     it('should create a teams thing', function() {
@@ -61,7 +61,7 @@ describe('REST API', function() {
           programId: 'A',
           name: 'A thing'
         })
-        .expect(200))
+          .expect(200))
         .then(res => {
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('name', 'A thing');
@@ -73,7 +73,7 @@ describe('REST API', function() {
         .send({ username: 'programMemberA', password: 'password' })
         .expect(200)
         .then(res => json('get', `/api/things/1?access_token=${res.body.id}`)
-        .expect(200))
+          .expect(200))
         .then(res => {
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('name', 'Widget 1');
@@ -85,7 +85,7 @@ describe('REST API', function() {
         .send({ username: 'programMemberA', password: 'password' })
         .expect(200)
         .then(res => json('put', `/api/things/1?access_token=${res.body.id}`)
-        .expect(200))
+          .expect(200))
         .then(res => {
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('name', 'Widget 1');
@@ -97,7 +97,7 @@ describe('REST API', function() {
         .send({ username: 'programMemberA', password: 'password' })
         .expect(200)
         .then(res => json('delete', `/api/things/1?access_token=${res.body.id}`)
-        .expect(401));
+          .expect(401));
     });
   });
 
@@ -107,7 +107,7 @@ describe('REST API', function() {
         .send({ username: 'programAdminA', password: 'password' })
         .expect(200)
         .then(res => json('get', `/api/things/2?access_token=${res.body.id}`)
-        .expect(401));
+          .expect(401));
     });
 
     it('should create a teams thing', function() {
@@ -118,7 +118,7 @@ describe('REST API', function() {
           programId: 'A',
           name: 'A thing'
         })
-        .expect(200))
+          .expect(200))
         .then(res => {
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('name', 'A thing');
@@ -130,7 +130,7 @@ describe('REST API', function() {
         .send({ username: 'programAdminA', password: 'password' })
         .expect(200)
         .then(res => json('get', `/api/things/1?access_token=${res.body.id}`)
-        .expect(200))
+          .expect(200))
         .then(res => {
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('name', 'Widget 1');
@@ -142,7 +142,7 @@ describe('REST API', function() {
         .send({ username: 'programAdminA', password: 'password' })
         .expect(200)
         .then(res => json('put', `/api/things/1?access_token=${res.body.id}`)
-        .expect(200))
+          .expect(200))
         .then(res => {
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('name', 'Widget 1');
@@ -154,7 +154,7 @@ describe('REST API', function() {
         .send({ username: 'programAdminA', password: 'password' })
         .expect(200)
         .then(res => json('delete', `/api/things/1?access_token=${res.body.id}`)
-        .expect(200));
+          .expect(200));
     });
   });
 });

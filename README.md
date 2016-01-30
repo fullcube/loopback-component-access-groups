@@ -49,8 +49,11 @@ Options:
 **authenticated**  
   nothing
 
+**$group:admin**  
+  create, read, update, delete
+
+**$group:manager**  
+  create, read, update, delete
+
 **$group:member**  
   create, read, update
-
-**teamAdmin**  
-  create, read, update, delete

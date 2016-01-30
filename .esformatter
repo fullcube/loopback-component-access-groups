@@ -21,7 +21,6 @@
     "before": {
       "ElseIfStatement": 1,
       "ElseStatement": 1,
-      "VariableDeclaration": 1,
       "TryClosingBrace" : 1,
       "FunctionDeclarationClosingBrace" : 1,
       "FunctionExpressionClosingBrace": 1,
@@ -29,7 +28,6 @@
     },
     "after": {
       "IfStatementOpeningBrace": 1,
-      "VariableDeclarationSemiColon": 2,
       "TryClosingBrace" : 1,
       "FunctionDeclarationOpeningBrace" : 1,
       "FunctionExpressionOpeningBrace": 1,
