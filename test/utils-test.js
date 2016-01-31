@@ -1,0 +1,64 @@
+'use strict';
+
+const path = require('path');
+const chai = require('chai');
+const expect = chai.expect;
+// const tbd = require('chai-tbd');
+
+chai.use(require('dirty-chai'));
+chai.use(require('sinon-chai'));
+require('mocha-sinon');
+
+const SIMPLE_APP = path.join(__dirname, 'fixtures', 'simple-app');
+const app = require(path.join(SIMPLE_APP, 'server/server.js'));
+
+describe('Utils', function() {
+  describe('getUserTenants', function() {
+    it('should return a list of tenants for a user', function() {
+      return app.accessUtils.getUserTenants('generalUser')
+        .then(tenants => {
+          expect(tenants).to.be.an('array');
+          expect(tenants).to.have.length(0);
+          return app.accessUtils.getUserTenants('programAdminA');
+        })
+        .then(tenants => {
+          expect(tenants).to.be.an('array');
+          expect(tenants).to.have.length(1);
+          expect(tenants[0]).to.have.property('programId', 'A');
+          expect(tenants[0]).to.have.property('role', 'admin');
+          return app.accessUtils.getUserTenants('programManagerA');
+        })
+        .then(tenants => {
+          expect(tenants).to.be.an('array');
+          expect(tenants).to.have.length(1);
+          expect(tenants[0]).to.have.property('programId', 'A');
+          expect(tenants[0]).to.have.property('role', 'manager');
+        });
+    });
+  });
+
+  describe('filterTenants', function() {
+    it('should return an empty array for a user that has no tenants', function() {
+      return app.accessUtils.filterTenants([ 'A', 'B', 'C' ], 'generalUser')
+        .then(tenants => {
+          expect(tenants).to.be.an('array');
+          expect(tenants).to.have.length(0);
+        });
+    });
+
+    it('should filter a list of tenants to only those that a user is a member of', function() {
+      return app.accessUtils.filterTenants([ 'A', 'B', 'C' ], 'programManagerA')
+        .then(tenants => {
+          expect(tenants).to.be.an('array');
+          expect(tenants).to.have.length(1);
+          expect(tenants[0]).to.equal('A');
+          return app.accessUtils.filterTenants([ 'A', 'B', 'C' ], 'programManagerB');
+        })
+        .then(tenants => {
+          expect(tenants).to.be.an('array');
+          expect(tenants).to.have.length(1);
+          expect(tenants[0]).to.equal('B');
+        });
+    });
+  });
+});
