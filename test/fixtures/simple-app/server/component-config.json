@@ -9,6 +9,7 @@
   },
   "../../../../lib": {
     "groupModel": "Team",
+    "userModel": "user",
     "foreignKey": "programId",
     "accessGroups": [
       "$group:admin",
