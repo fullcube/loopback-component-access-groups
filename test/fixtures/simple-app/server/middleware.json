@@ -2,11 +2,7 @@
   "initial:before": {
     "loopback#favicon": {},
     "loopback#context": {},
-    "loopback#token": {
-      "params": [
-        "state"
-      ]
-    },
+    "loopback#token": {},
     "../../../../lib/middleware/user-context": {}
   },
   "session": {},

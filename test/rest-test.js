@@ -22,6 +22,14 @@ function json(verb, url, data) {
 }
 
 describe('REST API', function() {
+  // beforeEach(function(done) {
+  //   app.models.fixtures.teardownFixtures(function() {
+  //     app.models.fixtures.setupFixtures(function() {
+  //       done();
+  //     });
+  //   });
+  // });
+
   describe('Role: unauthenticated', function() {
     it('should not allow access to list things without access token', function() {
       return json('get', '/api/things')
@@ -45,59 +53,116 @@ describe('REST API', function() {
   });
 
   describe('Role: team member', function() {
-    it('should not allow getting another teams thing', function() {
-      return json('post', '/api/users/login')
-        .send({ username: 'programMemberA', password: 'password' })
-        .expect(200)
-        .then(res => json('get', `/api/things/2?access_token=${res.body.id}`)
-          .expect(401));
+    describe('findById', function() {
+      it('should get a teams thing', function() {
+        return json('post', '/api/users/login')
+          .send({ username: 'programMemberA', password: 'password' })
+          .expect(200)
+          .then(res => json('get', `/api/things/1?access_token=${res.body.id}`)
+            .expect(200))
+          .then(res => {
+            expect(res.body).to.be.an('object');
+            expect(res.body).to.have.property('name', 'Widget 1');
+          });
+      });
+
+      it('should not get another teams thing', function() {
+        return json('post', '/api/users/login')
+          .send({ username: 'programMemberA', password: 'password' })
+          .expect(200)
+          .then(res => json('get', `/api/things/2?access_token=${res.body.id}`)
+            .expect(401));
+      });
     });
 
-    it('should create a teams thing', function() {
-      return json('post', '/api/users/login')
-        .send({ username: 'programMemberA', password: 'password' })
-        .expect(200)
-        .then(res => json('post', `/api/things?access_token=${res.body.id}`, {
-          programId: 'A',
-          name: 'A thing'
-        })
-          .expect(200))
-        .then(res => {
-          expect(res.body).to.be.an('object');
-          expect(res.body).to.have.property('name', 'A thing');
-        });
+    describe('create', function() {
+      let thingId = null;
+
+      it('should create a teams thing', function() {
+        return json('post', '/api/users/login')
+          .send({ username: 'programMemberA', password: 'password' })
+          .expect(200)
+          .then(res => json('post', `/api/things?access_token=${res.body.id}`, {
+            programId: 'A',
+            name: 'A thing'
+          })
+            .expect(200))
+          .then(res => {
+            expect(res.body).to.be.an('object');
+            expect(res.body).to.have.property('name', 'A thing');
+            thingId = res.body.id;
+          });
+      });
+
+      it('should not create another teams thing', function() {
+        return json('post', '/api/users/login')
+          .send({ username: 'programMemberA', password: 'password' })
+          .expect(200)
+          .then(res => json('post', `/api/things?access_token=${res.body.id}`, {
+            programId: 'B',
+            name: 'A thing'
+          })
+            .expect(401));
+      });
+
+      after(function() {
+        return app.models.Thing.destroyById(thingId);
+      });
     });
 
-    it('should read a teams thing', function() {
-      return json('post', '/api/users/login')
-        .send({ username: 'programMemberA', password: 'password' })
-        .expect(200)
-        .then(res => json('get', `/api/things/1?access_token=${res.body.id}`)
-          .expect(200))
-        .then(res => {
-          expect(res.body).to.be.an('object');
-          expect(res.body).to.have.property('name', 'Widget 1');
-        });
+    describe('find', function() {
+      it('should find a teams thing', function() {
+        return json('post', '/api/users/login')
+          .send({ username: 'programMemberA', password: 'password' })
+          .expect(200)
+          .then(res => json('get', `/api/things?filter[where][programId]=A&access_token=${res.body.id}`)
+            .expect(200))
+          .then(res => {
+            expect(res.body).to.be.an('array');
+            expect(res.body).to.have.length(1);
+            expect(res.body[0]).to.have.property('name', 'Widget 1');
+          });
+      });
+
+      it('should not find another teams thing', function() {
+        return json('post', '/api/users/login')
+          .send({ username: 'programMemberA', password: 'password' })
+          .expect(200)
+          .then(res => json('get', `/api/things?filter[where][programId]=B&access_token=${res.body.id}`)
+            .expect(401));
+      });
     });
 
-    it('should update a teams thing', function() {
-      return json('post', '/api/users/login')
-        .send({ username: 'programMemberA', password: 'password' })
-        .expect(200)
-        .then(res => json('put', `/api/things/1?access_token=${res.body.id}`)
-          .expect(200))
-        .then(res => {
-          expect(res.body).to.be.an('object');
-          expect(res.body).to.have.property('name', 'Widget 1');
-        });
+    describe('updateById', function() {
+      it('should update a teams thing', function() {
+        return json('post', '/api/users/login')
+          .send({ username: 'programMemberA', password: 'password' })
+          .expect(200)
+          .then(res => json('put', `/api/things/1?access_token=${res.body.id}`)
+            .expect(200))
+          .then(res => {
+            expect(res.body).to.be.an('object');
+            expect(res.body).to.have.property('name', 'Widget 1');
+          });
+      });
+
+      it('should not update another teams thing', function() {
+        return json('post', '/api/users/login')
+          .send({ username: 'programMemberA', password: 'password' })
+          .expect(200)
+          .then(res => json('put', `/api/things/2?access_token=${res.body.id}`)
+            .expect(401));
+      });
     });
 
-    it('should not delete a teams thing', function() {
-      return json('post', '/api/users/login')
-        .send({ username: 'programMemberA', password: 'password' })
-        .expect(200)
-        .then(res => json('delete', `/api/things/1?access_token=${res.body.id}`)
-          .expect(401));
+    describe('destroyById', function() {
+      it('should not delete a teams thing', function() {
+        return json('post', '/api/users/login')
+          .send({ username: 'programMemberA', password: 'password' })
+          .expect(200)
+          .then(res => json('delete', `/api/things/1?access_token=${res.body.id}`)
+            .expect(401));
+      });
     });
   });
 

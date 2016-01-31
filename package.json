@@ -32,9 +32,9 @@
     "lint": "eslint './{lib,test}/**/*.js'",
     "esformatter": "esformatter -i './{lib,test}/**/*.js'",
     "pretest": "npm run esformatter ; npm run lint",
+    "quicktest": "mocha test/*test.js",
     "test": "babel-node ./node_modules/.bin/isparta cover --report text --report html _mocha test/*test.js",
     "test:watch": "npm run test -- -w",
-    "coverage": "nyc report --reporter=text-lcov | coveralls",
     "outdated": "npm outdated --depth=0",
     "todo": "./node_modules/.bin/leasot src/common/**/*.js src/server/**/*.js src/server/**/*.js -r markdown > TODO.md || echo Refreshed TODO.md."
   },
