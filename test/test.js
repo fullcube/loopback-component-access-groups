@@ -24,7 +24,7 @@ function json(verb, url, data) {
 describe('User Context Middleware', function() {
   describe('Without loopback context', function() {
     it('should return null', function() {
-      const currentUser = app.models.Thing.getCurrentUser();
+      const currentUser = app.models.user.getCurrentUser();
 
       expect(currentUser).to.be.null();
     });
@@ -42,36 +42,42 @@ describe('User Context Middleware', function() {
         };
 
         loopbackContext.set('currentUser', user);
-        expect(app.models.Thing.getCurrentUser()).to.equal(user);
+        expect(app.models.user.getCurrentUser()).to.equal(user);
       });
     });
   });
+});
 
-  describe('Called remotely', function() {
-    describe('Role: unauthenticated', function() {
-      it('should return null', function() {
-        return json('get', '/api/users/currentUser')
-          .expect(200)
-          .then(res => {
-            expect(res.body).to.be.null();
-          });
-      });
+describe('Current User Mixin.', function() {
+  describe('Smoke test', function() {
+    it('should add a getCurrentUser model method', function() {
+      expect(app.models.user).itself.to.respondTo('getCurrentUser');
     });
+  });
 
-    describe('Role: authenticated', function() {
-      it('should return the current user', function() {
-        return json('post', '/api/users/login')
-          .send({ username: 'generalUser', password: 'password' })
-          .expect(200)
-          .then(res => json('get', `/api/users/currentUser?access_token=${res.body.id}`)
-            .expect(200))
-          .then(res => {
-            expect(res.body).to.be.an('object');
-            expect(res.body).to.have.property('id', 'generalUser');
-            expect(res.body).to.have.property('username', 'generalUser');
-            expect(res.body).to.have.property('email', 'generalUser@fullcube.com');
-          });
-      });
+  describe('Role: unauthenticated', function() {
+    it('should return null', function() {
+      return json('get', '/api/users/currentUser')
+        .expect(200)
+        .then(res => {
+          expect(res.body).to.be.null();
+        });
+    });
+  });
+
+  describe('Role: authenticated', function() {
+    it('should return the current user', function() {
+      return json('post', '/api/users/login')
+        .send({ username: 'generalUser', password: 'password' })
+        .expect(200)
+        .then(res => json('get', `/api/users/currentUser?access_token=${res.body.id}`)
+          .expect(200))
+        .then(res => {
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('id', 'generalUser');
+          expect(res.body).to.have.property('username', 'generalUser');
+          expect(res.body).to.have.property('email', 'generalUser@fullcube.com');
+        });
     });
   });
 });

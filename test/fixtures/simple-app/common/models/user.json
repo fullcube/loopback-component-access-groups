@@ -6,7 +6,7 @@
     "validateUpsert": true
   },
   "mixins": {
-    "Utils": true
+    "GetCurrentUser": true
   },
   "properties": {
     "id": {
