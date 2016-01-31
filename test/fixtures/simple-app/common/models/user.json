@@ -44,23 +44,26 @@
       "permission": "ALLOW"
     },
     {
-      "accessType": "READ",
+      "accessType": "*",
       "principalType": "ROLE",
-      "principalId": "programAdmin",
-      "permission": "ALLOW"
-    },
-    {
-      "accessType": "WRITE",
-      "principalType": "ROLE",
-      "principalId": "programAdmin",
-      "permission": "ALLOW"
-    },
-    {
-      "principalType": "ROLE",
-      "principalId": "programAdmin",
+      "principalId": "$everyone",
       "permission": "ALLOW",
-      "property": "create"
+      "property": "currentUser"
     }
   ],
-  "methods": {}
+  "methods": {
+    "currentUser": {
+      "description": "Get the current user.",
+      "isStatic": true,
+      "http": {
+        "path": "/currentUser",
+        "verb": "get"
+      },
+      "returns": {
+        "arg": "currentUser",
+        "type": "Object",
+        "root": true
+      }
+    }
+  }
 }

@@ -21,6 +21,61 @@ function json(verb, url, data) {
     .expect('Content-Type', /json/);
 }
 
+describe('User Context Middleware', function() {
+  describe('Without loopback context', function() {
+    it('should return null', function() {
+      const currentUser = app.models.Thing.getCurrentUser();
+
+      expect(currentUser).to.be.null();
+    });
+  });
+
+  describe('With user in loopback context', function() {
+    it('should return the user', function() {
+      app.loopback.runInContext(function() {
+        const loopbackContext = app.loopback.getCurrentContext();
+        const user = {
+          id: 'generalUser',
+          username: 'generalUser',
+          password: '$2a$10$Hb5a4OK7ZK97zdziGLSYgOScOy2lRQi0Kd2RCkldxRk0hZo6Eemy6',
+          email: 'generalUser@fullcube.com'
+        };
+
+        loopbackContext.set('currentUser', user);
+        expect(app.models.Thing.getCurrentUser()).to.equal(user);
+      });
+    });
+  });
+
+  describe('Called remotely', function() {
+    describe('Role: unauthenticated', function() {
+      it('should return null', function() {
+        return json('get', '/api/users/currentUser')
+          .expect(200)
+          .then(res => {
+            expect(res.body).to.be.null();
+          });
+      });
+    });
+
+    describe('Role: authenticated', function() {
+      it('should return the current user', function() {
+        return json('post', '/api/users/login')
+          .send({ username: 'generalUser', password: 'password' })
+          .expect(200)
+          .then(res => json('get', `/api/users/currentUser?access_token=${res.body.id}`)
+            .expect(200))
+          .then(res => {
+            expect(res.body).to.be.an('object');
+            expect(res.body).to.have.property('id', 'generalUser');
+            expect(res.body).to.have.property('username', 'generalUser');
+            expect(res.body).to.have.property('email', 'generalUser@fullcube.com');
+          });
+      });
+    });
+  });
+});
+
 describe('REST API', function() {
   describe('Role: unauthenticated', function() {
     it('should not allow access to list things without access token', function() {
