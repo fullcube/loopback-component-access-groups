@@ -54,7 +54,7 @@ describe('REST API', function() {
 
   describe('Role: team member', function() {
     describe('find', function() {
-      it('should find a teams thing', function() {
+      it('should find a teams things by tenant id', function() {
         return json('post', '/api/users/login')
           .send({ username: 'programMemberA', password: 'password' })
           .expect(200)
@@ -67,12 +67,41 @@ describe('REST API', function() {
           });
       });
 
-      it('should not find another teams thing', function() {
+      it('should not find another teams things by tenant id', function() {
         return json('post', '/api/users/login')
           .send({ username: 'programMemberA', password: 'password' })
           .expect(200)
           .then(res => json('get', `/api/things?filter[where][programId]=B&access_token=${res.body.id}`)
-            .expect(401));
+            .expect(200))
+          .then(res => {
+            expect(res.body).to.be.an('array');
+            expect(res.body).to.have.length(0);
+          });
+      });
+
+      it('should find a teams things by name', function() {
+        return json('post', '/api/users/login')
+          .send({ username: 'programMemberA', password: 'password' })
+          .expect(200)
+          .then(res => json('get', `/api/things?filter[where][name]=Widget 1&access_token=${res.body.id}`)
+            .expect(200))
+          .then(res => {
+            expect(res.body).to.be.an('array');
+            expect(res.body).to.have.length(1);
+            expect(res.body[0]).to.have.property('name', 'Widget 1');
+          });
+      });
+
+      it('should not find another teams things by name', function() {
+        return json('post', '/api/users/login')
+          .send({ username: 'programMemberA', password: 'password' })
+          .expect(200)
+          .then(res => json('get', `/api/things?filter[where][name]=Widget 2&access_token=${res.body.id}`)
+            .expect(200))
+          .then(res => {
+            expect(res.body).to.be.an('array');
+            expect(res.body).to.have.length(0);
+          });
       });
     });
 
@@ -99,7 +128,7 @@ describe('REST API', function() {
     });
 
     describe('findOne', function() {
-      it('should find a teams thing', function() {
+      it('should find a teams thing by tenant id', function() {
         return json('post', '/api/users/login')
           .send({ username: 'programMemberA', password: 'password' })
           .expect(200)
@@ -112,12 +141,41 @@ describe('REST API', function() {
           });
       });
 
-      it('should not find another teams thing', function() {
+      it('should not find another teams thing by tenant id', function() {
         return json('post', '/api/users/login')
           .send({ username: 'programMemberA', password: 'password' })
           .expect(200)
           .then(res => json('get', `/api/things?filter[where][programId]=B&access_token=${res.body.id}`)
-            .expect(401));
+            .expect(200))
+          .then(res => {
+            expect(res.body).to.be.an('array');
+            expect(res.body).to.have.length(0);
+          });
+      });
+
+      it('should find a teams thing by name', function() {
+        return json('post', '/api/users/login')
+          .send({ username: 'programMemberA', password: 'password' })
+          .expect(200)
+          .then(res => json('get', `/api/things?filter[where][name]=Widget 1&access_token=${res.body.id}`)
+            .expect(200))
+          .then(res => {
+            expect(res.body).to.be.an('array');
+            expect(res.body).to.have.length(1);
+            expect(res.body[0]).to.have.property('name', 'Widget 1');
+          });
+      });
+
+      it('should not find another teams thing by name', function() {
+        return json('post', '/api/users/login')
+          .send({ username: 'programMemberA', password: 'password' })
+          .expect(200)
+          .then(res => json('get', `/api/things?filter[where][name]=Widget 2&access_token=${res.body.id}`)
+            .expect(200))
+          .then(res => {
+            expect(res.body).to.be.an('array');
+            expect(res.body).to.have.length(0);
+          });
       });
     });
 

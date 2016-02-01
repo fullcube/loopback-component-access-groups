@@ -13,6 +13,29 @@ const SIMPLE_APP = path.join(__dirname, 'fixtures', 'simple-app');
 const app = require(path.join(SIMPLE_APP, 'server/server.js'));
 
 describe('Utils', function() {
+  describe('buildFilter', function() {
+    it('should return a where condiditon that includes all tenants for a user (no tenants)', function() {
+      return app.accessUtils.buildFilter('generalUser')
+        .then(filter => {
+          expect(filter).to.deep.equal({
+            programId: {
+              inq: []
+            }
+          });
+        });
+    });
+    it('should return a where condiditon that includes all tenants for a user (1 tenant)', function() {
+      return app.accessUtils.buildFilter('programAdminA')
+        .then(filter => {
+          expect(filter).to.deep.equal({
+            programId: {
+              inq: [ 'A' ]
+            }
+          });
+        });
+    });
+  });
+
   describe('getUserTenants', function() {
     it('should return a list of tenants for a user', function() {
       return app.accessUtils.getUserTenants('generalUser')
