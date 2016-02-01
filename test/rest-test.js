@@ -62,8 +62,9 @@ describe('REST API', function() {
             .expect(200))
           .then(res => {
             expect(res.body).to.be.an('array');
-            expect(res.body).to.have.length(1);
+            expect(res.body).to.have.length(2);
             expect(res.body[0]).to.have.property('name', 'Widget 1');
+            expect(res.body[1]).to.have.property('name', 'Widget 3');
           });
       });
 
@@ -103,6 +104,31 @@ describe('REST API', function() {
             expect(res.body).to.have.length(0);
           });
       });
+
+      it('should limit find results to only a teams things with a complex filter', function() {
+        const filter = {
+          where: {
+            and: [ {
+              status: 'active'
+            }, {
+              programId: {
+                inq: [ 'A', 'B' ]
+              }
+            } ]
+          }
+        };
+
+        return json('post', '/api/users/login')
+          .send({ username: 'programMemberA', password: 'password' })
+          .expect(200)
+          .then(res => json('get', `/api/things?filter=${JSON.stringify(filter)}&access_token=${res.body.id}`)
+            .expect(200))
+          .then(res => {
+            expect(res.body).to.be.an('array');
+            expect(res.body).to.have.length(1);
+            expect(res.body[0]).to.have.property('name', 'Widget 1');
+          });
+      });
     });
 
     describe('findById', function() {
@@ -136,8 +162,9 @@ describe('REST API', function() {
             .expect(200))
           .then(res => {
             expect(res.body).to.be.an('array');
-            expect(res.body).to.have.length(1);
+            expect(res.body).to.have.length(2);
             expect(res.body[0]).to.have.property('name', 'Widget 1');
+            expect(res.body[1]).to.have.property('name', 'Widget 3');
           });
       });
 
