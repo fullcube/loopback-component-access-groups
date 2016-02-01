@@ -51,6 +51,13 @@
       "property": "updateAttributes"
     },
     {
+      "accessType": "WRITE",
+      "principalType": "ROLE",
+      "principalId": "$group:member",
+      "permission": "ALLOW",
+      "property": "upsert"
+    },
+    {
       "accessType": "*",
       "principalType": "ROLE",
       "principalId": "$group:admin",

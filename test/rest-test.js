@@ -53,6 +53,29 @@ describe('REST API', function() {
   });
 
   describe('Role: team member', function() {
+    describe('find', function() {
+      it('should find a teams thing', function() {
+        return json('post', '/api/users/login')
+          .send({ username: 'programMemberA', password: 'password' })
+          .expect(200)
+          .then(res => json('get', `/api/things?filter[where][programId]=A&access_token=${res.body.id}`)
+            .expect(200))
+          .then(res => {
+            expect(res.body).to.be.an('array');
+            expect(res.body).to.have.length(1);
+            expect(res.body[0]).to.have.property('name', 'Widget 1');
+          });
+      });
+
+      it('should not find another teams thing', function() {
+        return json('post', '/api/users/login')
+          .send({ username: 'programMemberA', password: 'password' })
+          .expect(200)
+          .then(res => json('get', `/api/things?filter[where][programId]=B&access_token=${res.body.id}`)
+            .expect(401));
+      });
+    });
+
     describe('findById', function() {
       it('should get a teams thing', function() {
         return json('post', '/api/users/login')
@@ -71,6 +94,29 @@ describe('REST API', function() {
           .send({ username: 'programMemberA', password: 'password' })
           .expect(200)
           .then(res => json('get', `/api/things/2?access_token=${res.body.id}`)
+            .expect(401));
+      });
+    });
+
+    describe('findOne', function() {
+      it('should find a teams thing', function() {
+        return json('post', '/api/users/login')
+          .send({ username: 'programMemberA', password: 'password' })
+          .expect(200)
+          .then(res => json('get', `/api/things?filter[where][programId]=A&access_token=${res.body.id}`)
+            .expect(200))
+          .then(res => {
+            expect(res.body).to.be.an('array');
+            expect(res.body).to.have.length(1);
+            expect(res.body[0]).to.have.property('name', 'Widget 1');
+          });
+      });
+
+      it('should not find another teams thing', function() {
+        return json('post', '/api/users/login')
+          .send({ username: 'programMemberA', password: 'password' })
+          .expect(200)
+          .then(res => json('get', `/api/things?filter[where][programId]=B&access_token=${res.body.id}`)
             .expect(401));
       });
     });
@@ -110,39 +156,22 @@ describe('REST API', function() {
       });
     });
 
-    describe('find', function() {
-      it('should find a teams thing', function() {
-        return json('post', '/api/users/login')
-          .send({ username: 'programMemberA', password: 'password' })
-          .expect(200)
-          .then(res => json('get', `/api/things?filter[where][programId]=A&access_token=${res.body.id}`)
-            .expect(200))
-          .then(res => {
-            expect(res.body).to.be.an('array');
-            expect(res.body).to.have.length(1);
-            expect(res.body[0]).to.have.property('name', 'Widget 1');
-          });
-      });
-
-      it('should not find another teams thing', function() {
-        return json('post', '/api/users/login')
-          .send({ username: 'programMemberA', password: 'password' })
-          .expect(200)
-          .then(res => json('get', `/api/things?filter[where][programId]=B&access_token=${res.body.id}`)
-            .expect(401));
-      });
-    });
-
-    describe('updateById', function() {
+    describe('upsert', function() {
       it('should update a teams thing', function() {
         return json('post', '/api/users/login')
           .send({ username: 'programMemberA', password: 'password' })
           .expect(200)
-          .then(res => json('put', `/api/things/1?access_token=${res.body.id}`)
+          .then(res => json('put', `/api/things?access_token=${res.body.id}`)
+            .send({
+              id: 1,
+              programId: 'A',
+              name: 'Widget 1',
+              someprop: 'someval'
+            })
             .expect(200))
           .then(res => {
             expect(res.body).to.be.an('object');
-            expect(res.body).to.have.property('name', 'Widget 1');
+            expect(res.body).to.have.property('someprop', 'someval');
           });
       });
 
@@ -150,7 +179,37 @@ describe('REST API', function() {
         return json('post', '/api/users/login')
           .send({ username: 'programMemberA', password: 'password' })
           .expect(200)
+          .then(res => json('put', `/api/things?access_token=${res.body.id}`)
+            .send({
+              id: 2,
+              programId: 'A',
+              name: 'Widget 1',
+              someprop: 'someval'
+            })
+            .expect(401));
+      });
+    });
+
+    describe('updateAttributes', function() {
+      it('should update a teams thing attributes', function() {
+        return json('post', '/api/users/login')
+          .send({ username: 'programMemberA', password: 'password' })
+          .expect(200)
+          .then(res => json('put', `/api/things/1?access_token=${res.body.id}`)
+            .send({ someprop: 'someval' })
+            .expect(200))
+          .then(res => {
+            expect(res.body).to.be.an('object');
+            expect(res.body).to.have.property('someprop', 'someval');
+          });
+      });
+
+      it('should not update another teams thing attributes', function() {
+        return json('post', '/api/users/login')
+          .send({ username: 'programMemberA', password: 'password' })
+          .expect(200)
           .then(res => json('put', `/api/things/2?access_token=${res.body.id}`)
+            .send({ someprop: 'someval' })
             .expect(401));
       });
     });
@@ -161,6 +220,13 @@ describe('REST API', function() {
           .send({ username: 'programMemberA', password: 'password' })
           .expect(200)
           .then(res => json('delete', `/api/things/1?access_token=${res.body.id}`)
+            .expect(401));
+      });
+      it('should not delete another teams thing', function() {
+        return json('post', '/api/users/login')
+          .send({ username: 'programMemberA', password: 'password' })
+          .expect(200)
+          .then(res => json('delete', `/api/things/2?access_token=${res.body.id}`)
             .expect(401));
       });
     });
