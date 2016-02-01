@@ -37,23 +37,29 @@
       "permission": "ALLOW"
     },
     {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$group:manager",
+      "permission": "ALLOW"
+    },
+    {
       "accessType": "WRITE",
       "principalType": "ROLE",
-      "principalId": "$group:member",
+      "principalId": "$group:manager",
       "permission": "ALLOW",
       "property": "create"
     },
     {
       "accessType": "WRITE",
       "principalType": "ROLE",
-      "principalId": "$group:member",
+      "principalId": "$group:manager",
       "permission": "ALLOW",
       "property": "updateAttributes"
     },
     {
       "accessType": "WRITE",
       "principalType": "ROLE",
-      "principalId": "$group:member",
+      "principalId": "$group:manager",
       "permission": "ALLOW",
       "property": "upsert"
     },
