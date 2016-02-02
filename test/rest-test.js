@@ -34,13 +34,6 @@ function logInAs(name) {
 /* --------------------- */
 
 describe('REST API', function() {
-  beforeEach(function() {
-    if (app.models.User) {
-      // Speed up the password hashing algorithm
-      app.models.User.settings.saltWorkFactor = 4;
-    }
-  });
-
   describe('Role: unauthenticated', function() {
     it('should not allow access to list things without access token', function() {
       return json('get', '/api/things')

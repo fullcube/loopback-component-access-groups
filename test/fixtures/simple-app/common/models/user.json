@@ -3,7 +3,8 @@
   "base": "User",
   "idInjection": true,
   "options": {
-    "validateUpsert": true
+    "validateUpsert": true,
+    "saltWorkFactor": 1
   },
   "mixins": {
     "GetCurrentUser": true
