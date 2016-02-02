@@ -2,7 +2,6 @@
 
 /* eslint max-nested-callbacks: 0 */
 
-
 const path = require('path');
 const request = require('supertest-as-promised');
 const chai = require('chai');
@@ -71,7 +70,136 @@ describe('REST API', function() {
   ];
 
   users.forEach(user => {
-    describe(`${user.username}: User with ${user.abilities.join(', ')} permissions`, function() {
+    describe(`${user.username} (User with ${user.abilities.join(', ')} permissions):`, function() {
+      // exists
+      describe('exists', function() {
+        if (_includes(user.abilities, 'read')) {
+          it('should check if a teams thing exists by tenant id', function() {
+            return logInAs(user.username)
+              .then(res => json('get', `/api/things/1/exists?&access_token=${res.body.id}`)
+                .expect(200))
+              .then(res => {
+                expect(res.body).to.be.an('object');
+                expect(res.body).to.have.property('exists', true);
+              });
+          });
+        }
+        else {
+          it('should not check if a teams thing exists by tenant id', function() {
+            return logInAs(user.username)
+              .then(res => json('get', `/api/things/1/exists?access_token=${res.body.id}`)
+                .expect(401));
+          });
+        }
+        it('should not check if another teams thing exists by tenant id', function() {
+          return logInAs(user.username)
+            .then(res => json('get', `/api/things/2/exists?access_token=${res.body.id}`)
+              .expect(401));
+        });
+      });
+      // end exists
+
+      // count
+      describe('count', function() {
+        if (_includes(user.abilities, 'read')) {
+          it('should count a teams things by tenant id', function() {
+            return logInAs(user.username)
+              .then(res => json('get', `/api/things/count?where[programId]=A&access_token=${res.body.id}`)
+                .expect(200))
+              .then(res => {
+                expect(res.body).to.be.an('object');
+                expect(res.body).to.have.property('count', 2);
+              });
+          });
+        }
+        else {
+          it('should not find a teams things by tenant id', function() {
+            return logInAs(user.username)
+              .then(res => json('get', `/api/things/count?where[programId]=A&access_token=${res.body.id}`)
+                .expect(200))
+              .then(res => {
+                expect(res.body).to.be.an('object');
+                expect(res.body).to.have.property('count', 0);
+              });
+          });
+        }
+        it('should not count another teams things by tenant id', function() {
+          return logInAs(user.username)
+            .then(res => json('get', `/api/things/count?where[programId]=B&access_token=${res.body.id}`)
+              .expect(200))
+            .then(res => {
+              expect(res.body).to.be.an('object');
+              expect(res.body).to.have.property('count', 0);
+            });
+        });
+
+        if (_includes(user.abilities, 'read')) {
+          it('should count a teams things by name', function() {
+            return logInAs(user.username)
+              .then(res => json('get', `/api/things/count?where[name]=Widget 1&access_token=${res.body.id}`)
+                .expect(200))
+              .then(res => {
+                expect(res.body).to.be.an('object');
+                expect(res.body).to.have.property('count', 1);
+              });
+          });
+        }
+        else {
+          it('should not count a teams things by name', function() {
+            return logInAs(user.username)
+              .then(res => json('get', `/api/things/count?where[name]=Widget 1&access_token=${res.body.id}`)
+                .expect(200))
+              .then(res => {
+                expect(res.body).to.be.an('object');
+                expect(res.body).to.have.property('count', 0);
+              });
+          });
+        }
+        it('should not count another teams things by name', function() {
+          return logInAs(user.username)
+            .then(res => json('get', `/api/things/count?where[name]=Widget 2&access_token=${res.body.id}`)
+              .expect(200))
+            .then(res => {
+              expect(res.body).to.be.an('object');
+              expect(res.body).to.have.property('count', 0);
+            });
+        });
+
+        const filter = {
+          and: [ {
+            status: 'active'
+          }, {
+            programId: {
+              inq: [ 'A', 'B' ]
+            }
+          } ]
+        };
+
+        if (_includes(user.abilities, 'read')) {
+          it('should limit count results to a teams things with a complex filter', function() {
+            return logInAs(user.username)
+              .then(res => json('get', `/api/things/count?where=${JSON.stringify(filter)}&access_token=${res.body.id}`)
+                .expect(200))
+              .then(res => {
+                expect(res.body).to.be.an('object');
+                expect(res.body).to.have.property('count', 1);
+              });
+          });
+        }
+        else {
+          it('should limit count results to a teams things with a complex filter', function() {
+            return logInAs(user.username)
+              .then(res => json('get', `/api/things/count?where=${JSON.stringify(filter)}&access_token=${res.body.id}`)
+                .expect(200))
+              .then(res => {
+                expect(res.body).to.be.an('object');
+                expect(res.body).to.have.property('count', 0);
+              });
+          });
+        }
+      });
+      // end count
+
       // find
       describe('find', function() {
         if (_includes(user.abilities, 'read')) {
