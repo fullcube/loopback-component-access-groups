@@ -59,29 +59,4 @@ describe('Utils', function() {
         });
     });
   });
-
-  describe('filterTenants', function() {
-    it('should return an empty array for a user that has no tenants', function() {
-      return app.accessUtils.filterTenants([ 'A', 'B', 'C' ], 'generalUser')
-        .then(tenants => {
-          expect(tenants).to.be.an('array');
-          expect(tenants).to.have.length(0);
-        });
-    });
-
-    it('should filter a list of tenants to only those that a user is a member of', function() {
-      return app.accessUtils.filterTenants([ 'A', 'B', 'C' ], 'programManagerA')
-        .then(tenants => {
-          expect(tenants).to.be.an('array');
-          expect(tenants).to.have.length(1);
-          expect(tenants[0]).to.equal('A');
-          return app.accessUtils.filterTenants([ 'A', 'B', 'C' ], 'programManagerB');
-        })
-        .then(tenants => {
-          expect(tenants).to.be.an('array');
-          expect(tenants).to.have.length(1);
-          expect(tenants[0]).to.equal('B');
-        });
-    });
-  });
 });
