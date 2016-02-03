@@ -14,7 +14,7 @@ const app = require(path.join(SIMPLE_APP, 'server/server.js'));
 
 describe('Utils', function() {
   describe('buildFilter', function() {
-    it('should return a where condiditon that includes all tenants for a user (no tenants)', function() {
+    it('should return a where condition that includes all tenants for a user (no tenants)', function() {
       return app.accessUtils.buildFilter('generalUser')
         .then(filter => {
           expect(filter).to.deep.equal({
@@ -24,7 +24,7 @@ describe('Utils', function() {
           });
         });
     });
-    it('should return a where condiditon that includes all tenants for a user (1 tenant)', function() {
+    it('should return a where condition that includes all tenants for a user (1 tenant)', function() {
       return app.accessUtils.buildFilter('programAdminA')
         .then(filter => {
           expect(filter).to.deep.equal({

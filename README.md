@@ -1,6 +1,6 @@
 # Loopback Component Access
 
-This loopback component enables you to add multi-tenet style access controls to a loopback application. It enables you
+This loopback component enables you to add multi-tenant style access controls to a loopback application. It enables you
 to restrict access to model data based on a users roles within a specific context.
 
 # Usage
@@ -43,17 +43,17 @@ Options:
 
 ### Roles
 
-**everyone**  
+**everyone**
   nothing
 
-**authenticated**  
+**authenticated**
   nothing
 
-**$group:admin**  
+**$group:admin**
   create, read, update, delete
 
-**$group:manager**  
+**$group:manager**
   create, read, update, delete
 
-**$group:member**  
+**$group:member**
   create, read, update
