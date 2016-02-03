@@ -30,6 +30,7 @@
   "main": "./lib/index.js",
   "scripts": {
     "lint": "eslint './{lib,test}/**/*.js'",
+    "simple-app":"node test/fixtures/simple-app/server/server.js",
     "esformatter": "esformatter -i './{lib,test}/**/*.js'",
     "pretest": "npm run esformatter ; npm run lint",
     "quicktest": "mocha test/*test.js",
