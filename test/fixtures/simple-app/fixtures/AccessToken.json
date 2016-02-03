@@ -1,0 +1,25 @@
+[{
+  "id": "tokenAdmin",
+  "userId": "admin"
+}, {
+  "id": "tokenUser",
+  "userId": "generalUser"
+}, {
+  "id": "tokenAdminA",
+  "userId": "programAdminA"
+}, {
+  "id": "tokenManagerA",
+  "userId": "programManagerA"
+}, {
+  "id": "tokenMemberA",
+  "userId": "programMemberA"
+}, {
+  "id": "tokenAdminB",
+  "userId": "programAdminB"
+}, {
+  "id": "tokenManagerB",
+  "userId": "programManagerB"
+}, {
+  "id": "tokenMemberB",
+  "userId": "programMemberB"
+}]
