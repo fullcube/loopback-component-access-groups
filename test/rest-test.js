@@ -67,7 +67,7 @@ describe('REST API', function() {
       // exists
       describe('exists', function() {
         if (_includes(user.abilities, 'read')) {
-          it('should check if a teams thing exists by tenant id', function() {
+          it('should check if a teams thing exists by group id', function() {
             return logInAs(user.username)
               .then(res => json('get', `/api/things/1/exists?&access_token=${res.body.id}`)
                 .expect(200))
@@ -78,13 +78,13 @@ describe('REST API', function() {
           });
         }
         else {
-          it('should not check if a teams thing exists by tenant id', function() {
+          it('should not check if a teams thing exists by group id', function() {
             return logInAs(user.username)
               .then(res => json('get', `/api/things/1/exists?access_token=${res.body.id}`)
                 .expect(401));
           });
         }
-        it('should not check if another teams thing exists by tenant id', function() {
+        it('should not check if another teams thing exists by group id', function() {
           return logInAs(user.username)
             .then(res => json('get', `/api/things/2/exists?access_token=${res.body.id}`)
               .expect(401));
@@ -104,7 +104,7 @@ describe('REST API', function() {
       // count
       describe('count', function() {
         if (_includes(user.abilities, 'read')) {
-          it('should count a teams things by tenant id', function() {
+          it('should count a teams things by group id', function() {
             return logInAs(user.username)
               .then(res => json('get', `/api/things/count?where[programId]=A&access_token=${res.body.id}`)
                 .expect(200))
@@ -115,7 +115,7 @@ describe('REST API', function() {
           });
         }
         else {
-          it('should not find a teams things by tenant id', function() {
+          it('should not find a teams things by group id', function() {
             return logInAs(user.username)
               .then(res => json('get', `/api/things/count?where[programId]=A&access_token=${res.body.id}`)
                 .expect(200))
@@ -125,7 +125,7 @@ describe('REST API', function() {
               });
           });
         }
-        it('should not count another teams things by tenant id', function() {
+        it('should not count another teams things by group id', function() {
           return logInAs(user.username)
             .then(res => json('get', `/api/things/count?where[programId]=B&access_token=${res.body.id}`)
               .expect(200))
@@ -205,7 +205,7 @@ describe('REST API', function() {
       // find
       describe('find', function() {
         if (_includes(user.abilities, 'read')) {
-          it('should find a teams things by tenant id', function() {
+          it('should find a teams things by group id', function() {
             return logInAs(user.username)
               .then(res => json('get', `/api/things?filter[where][programId]=A&access_token=${res.body.id}`)
                 .expect(200))
@@ -218,7 +218,7 @@ describe('REST API', function() {
           });
         }
         else {
-          it('should not find a teams things by tenant id', function() {
+          it('should not find a teams things by group id', function() {
             return logInAs(user.username)
               .then(res => json('get', `/api/things?filter[where][programId]=A&access_token=${res.body.id}`)
                 .expect(200))
@@ -228,7 +228,7 @@ describe('REST API', function() {
               });
           });
         }
-        it('should not find another teams things by tenant id', function() {
+        it('should not find another teams things by group id', function() {
           return logInAs(user.username)
             .then(res => json('get', `/api/things?filter[where][programId]=B&access_token=${res.body.id}`)
               .expect(200))
@@ -347,7 +347,7 @@ describe('REST API', function() {
       // findOne
       describe('findOne', function() {
         if (_includes(user.abilities, 'read')) {
-          it('should find a teams thing by tenant id', function() {
+          it('should find a teams thing by group id', function() {
             return logInAs(user.username)
               .then(res => json('get', `/api/things?filter[where][programId]=A&access_token=${res.body.id}`)
                 .expect(200))
@@ -360,7 +360,7 @@ describe('REST API', function() {
           });
         }
         else {
-          it('should not find a teams thing by tenant id', function() {
+          it('should not find a teams thing by group id', function() {
             return logInAs(user.username)
               .then(res => json('get', `/api/things?filter[where][programId]=A&access_token=${res.body.id}`)
                 .expect(200))
@@ -371,7 +371,7 @@ describe('REST API', function() {
           });
         }
 
-        it('should not find another teams thing by tenant id', function() {
+        it('should not find another teams thing by group id', function() {
           return logInAs(user.username)
             .then(res => json('get', `/api/things?filter[where][programId]=B&access_token=${res.body.id}`)
               .expect(200))

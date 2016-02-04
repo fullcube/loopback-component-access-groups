@@ -14,7 +14,7 @@ const app = require(path.join(SIMPLE_APP, 'server/server.js'));
 
 describe('Utils', function() {
   describe('buildFilter', function() {
-    it('should return a where condition that includes all tenants for a user (no tenants)', function() {
+    it('should return a where condition that includes all groups for a user (no groups)', function() {
       return app.accessUtils.buildFilter('generalUser')
         .then(filter => {
           expect(filter).to.deep.equal({
@@ -24,7 +24,7 @@ describe('Utils', function() {
           });
         });
     });
-    it('should return a where condition that includes all tenants for a user (1 tenant)', function() {
+    it('should return a where condition that includes all groups for a user (1 group)', function() {
       return app.accessUtils.buildFilter('programAdminA')
         .then(filter => {
           expect(filter).to.deep.equal({
@@ -37,25 +37,25 @@ describe('Utils', function() {
   });
 
   describe('getUserGroups', function() {
-    it('should return a list of tenants for a user', function() {
+    it('should return a list of groups for a user', function() {
       return app.accessUtils.getUserGroups('generalUser')
-        .then(tenants => {
-          expect(tenants).to.be.an('array');
-          expect(tenants).to.have.length(0);
+        .then(groups => {
+          expect(groups).to.be.an('array');
+          expect(groups).to.have.length(0);
           return app.accessUtils.getUserGroups('programAdminA');
         })
-        .then(tenants => {
-          expect(tenants).to.be.an('array');
-          expect(tenants).to.have.length(1);
-          expect(tenants[0]).to.have.property('programId', 'A');
-          expect(tenants[0]).to.have.property('role', 'admin');
+        .then(groups => {
+          expect(groups).to.be.an('array');
+          expect(groups).to.have.length(1);
+          expect(groups[0]).to.have.property('programId', 'A');
+          expect(groups[0]).to.have.property('role', 'admin');
           return app.accessUtils.getUserGroups('programManagerA');
         })
-        .then(tenants => {
-          expect(tenants).to.be.an('array');
-          expect(tenants).to.have.length(1);
-          expect(tenants[0]).to.have.property('programId', 'A');
-          expect(tenants[0]).to.have.property('role', 'manager');
+        .then(groups => {
+          expect(groups).to.be.an('array');
+          expect(groups).to.have.length(1);
+          expect(groups[0]).to.have.property('programId', 'A');
+          expect(groups[0]).to.have.property('role', 'manager');
         });
     });
   });
