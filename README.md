@@ -27,17 +27,29 @@ to restrict access to model data based on a users roles within a specific contex
 
 Options:
 
- - `roleModel`
+- `userModel`
+
+  [String] : The name of the user model. *(default: 'User')*
+
+- `roleModel`
 
   [String] : The name of the model that should be used to register group access role resolvers. *(default: 'Role')*
 
- - `groupModel`
+- `groupModel`
 
   [String] : The name of the model that should be used to store and check group access roles. *(default: 'AccessGroup')*
+
+- `groupModels`
+
+  [Array] : A list of models that should be considered as group models. *(default: [ ])*
 
 - `foreignKey`
 
   [String] : The foreign key that should be used to determine which access group a model belongs to. *(default: 'groupId')*
+
+- `accessGroups`
+
+  [Array] : A list of group names. *(default: [ '$group:admin', '$group:member' ])*
 
 # Tests
 

@@ -15,6 +15,9 @@
       "$group:admin",
       "$group:manager",
       "$group:member"
+    ],
+    "groupModels": [
+      "Thing"
     ]
   }
 }
