@@ -18,17 +18,17 @@ describe('Utils', function() {
       return app.accessUtils.buildFilter('generalUser')
         .then(filter => {
           expect(filter).to.deep.equal({
-            programId: {
+            storeId: {
               inq: []
             }
           });
         });
     });
     it('should return a where condition that includes all groups for a user (1 group)', function() {
-      return app.accessUtils.buildFilter('programAdminA')
+      return app.accessUtils.buildFilter('storeAdminA')
         .then(filter => {
           expect(filter).to.deep.equal({
-            programId: {
+            storeId: {
               inq: [ 'A' ]
             }
           });
@@ -42,19 +42,19 @@ describe('Utils', function() {
         .then(groups => {
           expect(groups).to.be.an('array');
           expect(groups).to.have.length(0);
-          return app.accessUtils.getUserGroups('programAdminA');
+          return app.accessUtils.getUserGroups('storeAdminA');
         })
         .then(groups => {
           expect(groups).to.be.an('array');
           expect(groups).to.have.length(1);
-          expect(groups[0]).to.have.property('programId', 'A');
+          expect(groups[0]).to.have.property('storeId', 'A');
           expect(groups[0]).to.have.property('role', 'admin');
-          return app.accessUtils.getUserGroups('programManagerA');
+          return app.accessUtils.getUserGroups('storeManagerA');
         })
         .then(groups => {
           expect(groups).to.be.an('array');
           expect(groups).to.have.length(1);
-          expect(groups[0]).to.have.property('programId', 'A');
+          expect(groups[0]).to.have.property('storeId', 'A');
           expect(groups[0]).to.have.property('role', 'manager');
         });
     });

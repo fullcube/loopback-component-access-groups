@@ -9,33 +9,33 @@
 	"email": "generalUser@fullcube.com",
 	"password": "password"
 }, {
-  "id": "programAdminA",
-	"username": "programAdminA",
-	"email": "programAdminA@fullcube.com",
+  "id": "storeAdminA",
+	"username": "storeAdminA",
+	"email": "storeAdminA@fullcube.com",
 	"password": "password"
 }, {
-  "id": "programManagerA",
-	"username": "programManagerA",
-	"email": "programManagerA@fullcube.com",
+  "id": "storeManagerA",
+	"username": "storeManagerA",
+	"email": "storeManagerA@fullcube.com",
 	"password": "password"
 }, {
-  "id": "programMemberA",
-	"username": "programMemberA",
-	"email": "programMemberA@fullcube.com",
+  "id": "storeMemberA",
+	"username": "storeMemberA",
+	"email": "storeMemberA@fullcube.com",
 	"password": "password"
 }, {
-  "id": "programAdminB",
-	"username": "programAdminB",
-	"email": "programAdminB@fullcube.com",
+  "id": "storeAdminB",
+	"username": "storeAdminB",
+	"email": "storeAdminB@fullcube.com",
 	"password": "password"
 }, {
-  "id": "programManagerB",
-	"username": "programManagerB",
-	"email": "programManagerB@fullcube.com",
+  "id": "storeManagerB",
+	"username": "storeManagerB",
+	"email": "storeManagerB@fullcube.com",
 	"password": "password"
 }, {
-  "id": "programMemberB",
-	"username": "programMemberB",
-	"email": "programMemberB@fullcube.com",
+  "id": "storeMemberB",
+	"username": "storeMemberB",
+	"email": "storeMemberB@fullcube.com",
 	"password": "password"
 }]

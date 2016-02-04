@@ -1,5 +1,5 @@
 {
-  "name": "Program",
+  "name": "Store",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -21,8 +21,18 @@
     "users": {
       "type": "hasMany",
       "model": "user",
-      "foreignKey": "programId",
+      "foreignKey": "storeId",
       "through": "Team"
+    },
+    "invoices": {
+      "type": "hasMany",
+      "model": "Invoice",
+      "foreignKey": "storeId"
+    },
+    "transactions": {
+      "type": "hasMany",
+      "model": "Transaction",
+      "foreignKey": "storeId"
     }
   },
   "acls": [

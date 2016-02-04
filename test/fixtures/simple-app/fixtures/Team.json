@@ -1,25 +1,25 @@
 [{
-	"programId": "A",
-	"userId": "programAdminA",
+	"storeId": "A",
+	"userId": "storeAdminA",
 	"role": "admin"
 }, {
-	"programId": "A",
-	"userId": "programManagerA",
+	"storeId": "A",
+	"userId": "storeManagerA",
 	"role": "manager"
 }, {
-	"programId": "A",
-	"userId": "programMemberA",
+	"storeId": "A",
+	"userId": "storeMemberA",
 	"role": "member"
 }, {
-	"programId": "B",
-	"userId": "programAdminB",
+	"storeId": "B",
+	"userId": "storeAdminB",
 	"role": "admin"
 }, {
-	"programId": "B",
-	"userId": "programManagerB",
+	"storeId": "B",
+	"userId": "storeManagerB",
 	"role": "manager"
 }, {
-	"programId": "B",
-	"userId": "programMemberB",
+	"storeId": "B",
+	"userId": "storeMemberB",
 	"role": "member"
 }]

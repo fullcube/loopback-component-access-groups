@@ -1,0 +1,79 @@
+{
+  "name": "Invoice",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "storeId": {
+      "type": "string",
+      "required": true
+    },
+    "invoiceNumber": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "Store": {
+      "type": "belongsTo",
+      "model": "Store",
+      "foreignKey": "storeId"
+    },
+    "transactions": {
+      "type": "hasMany",
+      "model": "Transaction",
+      "foreignKey": "invoiceId"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$group:member",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$group:manager",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "WRITE",
+      "principalType": "ROLE",
+      "principalId": "$group:manager",
+      "permission": "ALLOW",
+      "property": "create"
+    },
+    {
+      "accessType": "WRITE",
+      "principalType": "ROLE",
+      "principalId": "$group:manager",
+      "permission": "ALLOW",
+      "property": "updateAttributes"
+    },
+    {
+      "accessType": "WRITE",
+      "principalType": "ROLE",
+      "principalId": "$group:manager",
+      "permission": "ALLOW",
+      "property": "upsert"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$group:admin",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
+}

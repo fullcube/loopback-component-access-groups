@@ -1,12 +1,16 @@
 {
-  "name": "Thing",
+  "name": "Transaction",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "programId": {
+    "storeId": {
+      "type": "string",
+      "required": true
+    },
+    "invoiceId": {
       "type": "string",
       "required": true
     },
@@ -17,10 +21,15 @@
   },
   "validations": [],
   "relations": {
-    "Program": {
+    "Store": {
       "type": "belongsTo",
-      "model": "Program",
-      "foreignKey": "programId"
+      "model": "Store",
+      "foreignKey": "storeId"
+    },
+    "Invoice": {
+      "type": "belongsTo",
+      "model": "Invoice",
+      "foreignKey": "invoiceId"
     }
   },
   "acls": [

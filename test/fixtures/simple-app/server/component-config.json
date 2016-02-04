@@ -8,16 +8,18 @@
     "fixturesPath": "/test/fixtures/simple-app/fixtures/"
   },
   "../../../../lib": {
-    "groupModel": "Team",
     "userModel": "user",
-    "foreignKey": "programId",
+    "roleModel": "Role",
+    "groupModel": "Team",
+    "foreignKey": "storeId",
     "accessGroups": [
       "$group:admin",
       "$group:manager",
       "$group:member"
     ],
     "groupModels": [
-      "Thing"
+      "Invoice",
+      "Transaction"
     ]
   }
 }

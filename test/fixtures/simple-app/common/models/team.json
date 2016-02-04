@@ -6,7 +6,7 @@
     "validateUpsert": true
   },
   "properties": {
-    "programId": {
+    "storeId": {
       "type": "string",
       "required": true
     },
@@ -21,10 +21,10 @@
   },
   "validations": [],
   "relations": {
-    "program": {
+    "store": {
       "type": "belongsTo",
-      "model": "Program",
-      "foreignKey": "programId"
+      "model": "Store",
+      "foreignKey": "storeId"
     },
     "user": {
       "type": "belongsTo",

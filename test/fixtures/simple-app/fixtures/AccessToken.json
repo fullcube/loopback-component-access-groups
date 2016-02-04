@@ -6,20 +6,20 @@
   "userId": "generalUser"
 }, {
   "id": "tokenAdminA",
-  "userId": "programAdminA"
+  "userId": "storeAdminA"
 }, {
   "id": "tokenManagerA",
-  "userId": "programManagerA"
+  "userId": "storeManagerA"
 }, {
   "id": "tokenMemberA",
-  "userId": "programMemberA"
+  "userId": "storeMemberA"
 }, {
   "id": "tokenAdminB",
-  "userId": "programAdminB"
+  "userId": "storeAdminB"
 }, {
   "id": "tokenManagerB",
-  "userId": "programManagerB"
+  "userId": "storeManagerB"
 }, {
   "id": "tokenMemberB",
-  "userId": "programMemberB"
+  "userId": "storeMemberB"
 }]

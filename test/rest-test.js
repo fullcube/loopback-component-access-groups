@@ -35,13 +35,13 @@ function logInAs(name) {
 
 describe('REST API', function() {
   describe('Role: unauthenticated', function() {
-    it('should not allow access to list things without access token', function() {
-      return json('get', '/api/things')
+    it('should not allow access to list invoices without access token', function() {
+      return json('get', '/api/invoices')
         .expect(401);
     });
 
-    it('should not allow access to a teams thing without access token', function() {
-      return json('get', '/api/things/1')
+    it('should not allow access to a teams invoice without access token', function() {
+      return json('get', '/api/invoices/1')
         .expect(401);
     });
   });
@@ -51,13 +51,13 @@ describe('REST API', function() {
       username: 'generalUser',
       abilities: []
     }, {
-      username: 'programMemberA',
+      username: 'storeMemberA',
       abilities: [ 'read' ]
     }, {
-      username: 'programManagerA',
+      username: 'storeManagerA',
       abilities: [ 'create', 'read', 'update' ]
     }, {
-      username: 'programAdminA',
+      username: 'storeAdminA',
       abilities: [ 'create', 'read', 'update', 'delete' ]
     }
   ];
@@ -67,9 +67,9 @@ describe('REST API', function() {
       // exists
       describe('exists', function() {
         if (_includes(user.abilities, 'read')) {
-          it('should check if a teams thing exists by group id', function() {
+          it('should check if a teams invoice exists by group id', function() {
             return logInAs(user.username)
-              .then(res => json('get', `/api/things/1/exists?&access_token=${res.body.id}`)
+              .then(res => json('get', `/api/invoices/1/exists?&access_token=${res.body.id}`)
                 .expect(200))
               .then(res => {
                 expect(res.body).to.be.an('object');
@@ -78,20 +78,20 @@ describe('REST API', function() {
           });
         }
         else {
-          it('should not check if a teams thing exists by group id', function() {
+          it('should not check if a teams invoice exists by group id', function() {
             return logInAs(user.username)
-              .then(res => json('get', `/api/things/1/exists?access_token=${res.body.id}`)
+              .then(res => json('get', `/api/invoices/1/exists?access_token=${res.body.id}`)
                 .expect(401));
           });
         }
-        it('should not check if another teams thing exists by group id', function() {
+        it('should not check if another teams invoice exists by group id', function() {
           return logInAs(user.username)
-            .then(res => json('get', `/api/things/2/exists?access_token=${res.body.id}`)
+            .then(res => json('get', `/api/invoices/2/exists?access_token=${res.body.id}`)
               .expect(401));
         });
-        it('should return false when checking for existance of a thing that doesnt exist', function() {
+        it('should return false when checking for existance of a invoice that doesnt exist', function() {
           return logInAs(user.username)
-            .then(res => json('get', `/api/things/unknown-id/exists?access_token=${res.body.id}`)
+            .then(res => json('get', `/api/invoices/unknown-id/exists?access_token=${res.body.id}`)
               .expect(200))
             .then(res => {
               expect(res.body).to.be.an('object');
@@ -104,9 +104,9 @@ describe('REST API', function() {
       // count
       describe('count', function() {
         if (_includes(user.abilities, 'read')) {
-          it('should count a teams things by group id', function() {
+          it('should count a teams invoices by group id', function() {
             return logInAs(user.username)
-              .then(res => json('get', `/api/things/count?where[programId]=A&access_token=${res.body.id}`)
+              .then(res => json('get', `/api/invoices/count?where[storeId]=A&access_token=${res.body.id}`)
                 .expect(200))
               .then(res => {
                 expect(res.body).to.be.an('object');
@@ -115,9 +115,9 @@ describe('REST API', function() {
           });
         }
         else {
-          it('should not find a teams things by group id', function() {
+          it('should not find a teams invoices by group id', function() {
             return logInAs(user.username)
-              .then(res => json('get', `/api/things/count?where[programId]=A&access_token=${res.body.id}`)
+              .then(res => json('get', `/api/invoices/count?where[storeId]=A&access_token=${res.body.id}`)
                 .expect(200))
               .then(res => {
                 expect(res.body).to.be.an('object');
@@ -125,9 +125,9 @@ describe('REST API', function() {
               });
           });
         }
-        it('should not count another teams things by group id', function() {
+        it('should not count another teams invoices by group id', function() {
           return logInAs(user.username)
-            .then(res => json('get', `/api/things/count?where[programId]=B&access_token=${res.body.id}`)
+            .then(res => json('get', `/api/invoices/count?where[storeId]=B&access_token=${res.body.id}`)
               .expect(200))
             .then(res => {
               expect(res.body).to.be.an('object');
@@ -136,9 +136,9 @@ describe('REST API', function() {
         });
 
         if (_includes(user.abilities, 'read')) {
-          it('should count a teams things by name', function() {
+          it('should count a teams invoices by invoiceNumber', function() {
             return logInAs(user.username)
-              .then(res => json('get', `/api/things/count?where[name]=Widget 1&access_token=${res.body.id}`)
+              .then(res => json('get', `/api/invoices/count?where[invoiceNumber]=1&access_token=${res.body.id}`)
                 .expect(200))
               .then(res => {
                 expect(res.body).to.be.an('object');
@@ -147,9 +147,9 @@ describe('REST API', function() {
           });
         }
         else {
-          it('should not count a teams things by name', function() {
+          it('should not count a teams invoices by invoiceNumber', function() {
             return logInAs(user.username)
-              .then(res => json('get', `/api/things/count?where[name]=Widget 1&access_token=${res.body.id}`)
+              .then(res => json('get', `/api/invoices/count?where[invoiceNumber]=1&access_token=${res.body.id}`)
                 .expect(200))
               .then(res => {
                 expect(res.body).to.be.an('object');
@@ -157,9 +157,9 @@ describe('REST API', function() {
               });
           });
         }
-        it('should not count another teams things by name', function() {
+        it('should not count another teams invoices by invoiceNumber', function() {
           return logInAs(user.username)
-            .then(res => json('get', `/api/things/count?where[name]=Widget 2&access_token=${res.body.id}`)
+            .then(res => json('get', `/api/invoices/count?where[invoiceNumber]=2&access_token=${res.body.id}`)
               .expect(200))
             .then(res => {
               expect(res.body).to.be.an('object');
@@ -167,20 +167,20 @@ describe('REST API', function() {
             });
         });
 
-        const filter = {
+        const filter = JSON.stringify({
           and: [ {
             status: 'active'
           }, {
-            programId: {
+            storeId: {
               inq: [ 'A', 'B' ]
             }
           } ]
-        };
+        });
 
         if (_includes(user.abilities, 'read')) {
-          it('should limit count results to a teams things with a complex filter', function() {
+          it('should limit count results to a teams invoices with a complex filter', function() {
             return logInAs(user.username)
-              .then(res => json('get', `/api/things/count?where=${JSON.stringify(filter)}&access_token=${res.body.id}`)
+              .then(res => json('get', `/api/invoices/count?where=${filter}&access_token=${res.body.id}`)
                 .expect(200))
               .then(res => {
                 expect(res.body).to.be.an('object');
@@ -189,9 +189,9 @@ describe('REST API', function() {
           });
         }
         else {
-          it('should limit count results to a teams things with a complex filter', function() {
+          it('should limit count results to a teams invoices with a complex filter', function() {
             return logInAs(user.username)
-              .then(res => json('get', `/api/things/count?where=${JSON.stringify(filter)}&access_token=${res.body.id}`)
+              .then(res => json('get', `/api/invoices/count?where=${filter}&access_token=${res.body.id}`)
                 .expect(200))
               .then(res => {
                 expect(res.body).to.be.an('object');
@@ -205,42 +205,42 @@ describe('REST API', function() {
       // find
       describe('find', function() {
         if (_includes(user.abilities, 'read')) {
-          it('should find a teams things', function() {
+          it('should find a teams invoices', function() {
             return logInAs(user.username)
-              .then(res => json('get', `/api/things?access_token=${res.body.id}`)
+              .then(res => json('get', `/api/invoices?access_token=${res.body.id}`)
                 .expect(200))
               .then(res => {
                 expect(res.body).to.be.an('array');
                 expect(res.body).to.have.length(2);
-                expect(res.body[0]).to.have.property('name', 'Widget 1');
-                expect(res.body[1]).to.have.property('name', 'Widget 3');
+                expect(res.body[0]).to.have.property('invoiceNumber', 1);
+                expect(res.body[1]).to.have.property('invoiceNumber', 3);
               });
           });
-          it('should find a teams things by group id', function() {
+          it('should find a teams invoices by group id', function() {
             return logInAs(user.username)
-              .then(res => json('get', `/api/things?filter[where][programId]=A&access_token=${res.body.id}`)
+              .then(res => json('get', `/api/invoices?filter[where][storeId]=A&access_token=${res.body.id}`)
                 .expect(200))
               .then(res => {
                 expect(res.body).to.be.an('array');
                 expect(res.body).to.have.length(2);
-                expect(res.body[0]).to.have.property('name', 'Widget 1');
-                expect(res.body[1]).to.have.property('name', 'Widget 3');
+                expect(res.body[0]).to.have.property('invoiceNumber', 1);
+                expect(res.body[1]).to.have.property('invoiceNumber', 3);
               });
           });
         }
         else {
-          it('should not find a teams things', function() {
+          it('should not find a teams invoices', function() {
             return logInAs(user.username)
-              .then(res => json('get', `/api/things?access_token=${res.body.id}`)
+              .then(res => json('get', `/api/invoices?access_token=${res.body.id}`)
                 .expect(200))
               .then(res => {
                 expect(res.body).to.be.an('array');
                 expect(res.body).to.have.length(0);
               });
           });
-          it('should not find a teams things by group id', function() {
+          it('should not find a teams invoices by group id', function() {
             return logInAs(user.username)
-              .then(res => json('get', `/api/things?filter[where][programId]=A&access_token=${res.body.id}`)
+              .then(res => json('get', `/api/invoices?filter[where][storeId]=A&access_token=${res.body.id}`)
                 .expect(200))
               .then(res => {
                 expect(res.body).to.be.an('array');
@@ -248,9 +248,9 @@ describe('REST API', function() {
               });
           });
         }
-        it('should not find another teams things by group id', function() {
+        it('should not find another teams invoices by group id', function() {
           return logInAs(user.username)
-            .then(res => json('get', `/api/things?filter[where][programId]=B&access_token=${res.body.id}`)
+            .then(res => json('get', `/api/invoices?filter[where][storeId]=B&access_token=${res.body.id}`)
               .expect(200))
             .then(res => {
               expect(res.body).to.be.an('array');
@@ -259,21 +259,21 @@ describe('REST API', function() {
         });
 
         if (_includes(user.abilities, 'read')) {
-          it('should find a teams things by name', function() {
+          it('should find a teams invoices by invoiceNumber', function() {
             return logInAs(user.username)
-              .then(res => json('get', `/api/things?filter[where][name]=Widget 1&access_token=${res.body.id}`)
+              .then(res => json('get', `/api/invoices?filter[where][invoiceNumber]=1&access_token=${res.body.id}`)
                 .expect(200))
               .then(res => {
                 expect(res.body).to.be.an('array');
                 expect(res.body).to.have.length(1);
-                expect(res.body[0]).to.have.property('name', 'Widget 1');
+                expect(res.body[0]).to.have.property('invoiceNumber', 1);
               });
           });
         }
         else {
-          it('should not find a teams things by name', function() {
+          it('should not find a teams invoices by invoiceNumber', function() {
             return logInAs(user.username)
-              .then(res => json('get', `/api/things?filter[where][name]=Widget 1&access_token=${res.body.id}`)
+              .then(res => json('get', `/api/invoices?filter[where][invoiceNumber]=1&access_token=${res.body.id}`)
                 .expect(200))
               .then(res => {
                 expect(res.body).to.be.an('array');
@@ -281,9 +281,9 @@ describe('REST API', function() {
               });
           });
         }
-        it('should not find another teams things by name', function() {
+        it('should not find another teams invoices by invoiceNumber', function() {
           return logInAs(user.username)
-            .then(res => json('get', `/api/things?filter[where][name]=Widget 2&access_token=${res.body.id}`)
+            .then(res => json('get', `/api/invoices?filter[where][invoiceNumber]=2&access_token=${res.body.id}`)
               .expect(200))
             .then(res => {
               expect(res.body).to.be.an('array');
@@ -291,34 +291,34 @@ describe('REST API', function() {
             });
         });
 
-        const filter = {
+        const filter = JSON.stringify({
           where: {
             and: [ {
               status: 'active'
             }, {
-              programId: {
+              storeId: {
                 inq: [ 'A', 'B' ]
               }
             } ]
           }
-        };
+        });
 
         if (_includes(user.abilities, 'read')) {
-          it('should limit find results to a teams things with a complex filter', function() {
+          it('should limit find results to a teams invoices with a complex filter', function() {
             return logInAs(user.username)
-              .then(res => json('get', `/api/things?filter=${JSON.stringify(filter)}&access_token=${res.body.id}`)
+              .then(res => json('get', `/api/invoices?filter=${filter}&access_token=${res.body.id}`)
                 .expect(200))
               .then(res => {
                 expect(res.body).to.be.an('array');
                 expect(res.body).to.have.length(1);
-                expect(res.body[0]).to.have.property('name', 'Widget 1');
+                expect(res.body[0]).to.have.property('invoiceNumber', 1);
               });
           });
         }
         else {
-          it('should limit find results to a teams things with a complex filter', function() {
+          it('should limit find results to a teams invoices with a complex filter', function() {
             return logInAs(user.username)
-              .then(res => json('get', `/api/things?filter=${JSON.stringify(filter)}&access_token=${res.body.id}`)
+              .then(res => json('get', `/api/invoices?filter=${filter}&access_token=${res.body.id}`)
                 .expect(200))
               .then(res => {
                 expect(res.body).to.be.an('array');
@@ -332,33 +332,33 @@ describe('REST API', function() {
       // findById
       describe('findById', function() {
         if (_includes(user.abilities, 'read')) {
-          it('should get a teams thing', function() {
+          it('should get a teams invoice', function() {
             return logInAs(user.username)
-              .then(res => json('get', `/api/things/1?access_token=${res.body.id}`)
+              .then(res => json('get', `/api/invoices/1?access_token=${res.body.id}`)
                 .expect(200))
               .then(res => {
                 expect(res.body).to.be.an('object');
-                expect(res.body).to.have.property('name', 'Widget 1');
+                expect(res.body).to.have.property('invoiceNumber', 1);
               });
           });
         }
         else {
-          it('should not get a teams thing', function() {
+          it('should not get a teams invoice', function() {
             return logInAs(user.username)
-              .then(res => json('get', `/api/things/1?access_token=${res.body.id}`)
+              .then(res => json('get', `/api/invoices/1?access_token=${res.body.id}`)
                 .expect(401));
           });
         }
 
-        it('should not get another teams thing', function() {
+        it('should not get another teams invoice', function() {
           return logInAs(user.username)
-            .then(res => json('get', `/api/things/2?access_token=${res.body.id}`)
+            .then(res => json('get', `/api/invoices/2?access_token=${res.body.id}`)
               .expect(401));
         });
 
-        it('should return a 404 when getting a thing that doesnt exist', function() {
+        it('should return a 404 when getting a invoice that doesnt exist', function() {
           return logInAs(user.username)
-            .then(res => json('get', `/api/things/unknown-id?access_token=${res.body.id}`)
+            .then(res => json('get', `/api/invoices/unknown-id?access_token=${res.body.id}`)
               .expect(404));
         });
       });
@@ -367,22 +367,22 @@ describe('REST API', function() {
       // findOne
       describe('findOne', function() {
         if (_includes(user.abilities, 'read')) {
-          it('should find a teams thing by group id', function() {
+          it('should find a teams invoice by group id', function() {
             return logInAs(user.username)
-              .then(res => json('get', `/api/things?filter[where][programId]=A&access_token=${res.body.id}`)
+              .then(res => json('get', `/api/invoices?filter[where][storeId]=A&access_token=${res.body.id}`)
                 .expect(200))
               .then(res => {
                 expect(res.body).to.be.an('array');
                 expect(res.body).to.have.length(2);
-                expect(res.body[0]).to.have.property('name', 'Widget 1');
-                expect(res.body[1]).to.have.property('name', 'Widget 3');
+                expect(res.body[0]).to.have.property('invoiceNumber', 1);
+                expect(res.body[1]).to.have.property('invoiceNumber', 3);
               });
           });
         }
         else {
-          it('should not find a teams thing by group id', function() {
+          it('should not find a teams invoice by group id', function() {
             return logInAs(user.username)
-              .then(res => json('get', `/api/things?filter[where][programId]=A&access_token=${res.body.id}`)
+              .then(res => json('get', `/api/invoices?filter[where][storeId]=A&access_token=${res.body.id}`)
                 .expect(200))
               .then(res => {
                 expect(res.body).to.be.an('array');
@@ -391,9 +391,9 @@ describe('REST API', function() {
           });
         }
 
-        it('should not find another teams thing by group id', function() {
+        it('should not find another teams invoice by group id', function() {
           return logInAs(user.username)
-            .then(res => json('get', `/api/things?filter[where][programId]=B&access_token=${res.body.id}`)
+            .then(res => json('get', `/api/invoices?filter[where][storeId]=B&access_token=${res.body.id}`)
               .expect(200))
             .then(res => {
               expect(res.body).to.be.an('array');
@@ -402,21 +402,21 @@ describe('REST API', function() {
         });
 
         if (_includes(user.abilities, 'read')) {
-          it('should find a teams thing by name', function() {
+          it('should find a teams invoice by invoiceNumber', function() {
             return logInAs(user.username)
-              .then(res => json('get', `/api/things?filter[where][name]=Widget 1&access_token=${res.body.id}`)
+              .then(res => json('get', `/api/invoices?filter[where][invoiceNumber]=1&access_token=${res.body.id}`)
                 .expect(200))
               .then(res => {
                 expect(res.body).to.be.an('array');
                 expect(res.body).to.have.length(1);
-                expect(res.body[0]).to.have.property('name', 'Widget 1');
+                expect(res.body[0]).to.have.property('invoiceNumber', 1);
               });
           });
         }
         else {
-          it('should not find a teams thing by name', function() {
+          it('should not find a teams invoice by invoiceNumber', function() {
             return logInAs(user.username)
-              .then(res => json('get', `/api/things?filter[where][name]=Widget 1&access_token=${res.body.id}`)
+              .then(res => json('get', `/api/invoices?filter[where][invoiceNumber]=1&access_token=${res.body.id}`)
                 .expect(200))
               .then(res => {
                 expect(res.body).to.be.an('array');
@@ -425,9 +425,9 @@ describe('REST API', function() {
           });
         }
 
-        it('should not find another teams thing by name', function() {
+        it('should not find another teams invoice by invoiceNumber', function() {
           return logInAs(user.username)
-            .then(res => json('get', `/api/things?filter[where][name]=Widget 2&access_token=${res.body.id}`)
+            .then(res => json('get', `/api/invoices?filter[where][invoiceNumber]=2&access_token=${res.body.id}`)
               .expect(200))
             .then(res => {
               expect(res.body).to.be.an('array');
@@ -439,40 +439,40 @@ describe('REST API', function() {
 
       // create
       describe('create', function() {
-        let thingId = null;
+        let invoiceId = null;
 
         if (_includes(user.abilities, 'create')) {
-          it('should create a teams thing', function() {
+          it('should create a teams invoice', function() {
             return logInAs(user.username)
-              .then(res => json('post', `/api/things?access_token=${res.body.id}`)
-                .send({ programId: 'A', name: 'A thing' })
+              .then(res => json('post', `/api/invoices?access_token=${res.body.id}`)
+                .send({ storeId: 'A', invoiceNumber: 100 })
                 .expect(200))
               .then(res => {
                 expect(res.body).to.be.an('object');
-                expect(res.body).to.have.property('name', 'A thing');
-                thingId = res.body.id;
+                expect(res.body).to.have.property('invoiceNumber', 100);
+                invoiceId = res.body.id;
               });
           });
         }
         else {
-          it('should not create a teams thing', function() {
+          it('should not create a teams invoice', function() {
             return logInAs(user.username)
-              .then(res => json('post', `/api/things?access_token=${res.body.id}`)
-                .send({ programId: 'A', name: 'A thing' })
+              .then(res => json('post', `/api/invoices?access_token=${res.body.id}`)
+                .send({ storeId: 'A', name: 'A invoice' })
                 .expect(401));
           });
         }
 
-        it('should not create another teams thing', function() {
+        it('should not create another teams invoice', function() {
           return logInAs(user.username)
-            .then(res => json('post', `/api/things?access_token=${res.body.id}`)
-              .send({ programId: 'B', name: 'A thing' })
+            .then(res => json('post', `/api/invoices?access_token=${res.body.id}`)
+              .send({ storeId: 'B', name: 'A invoice' })
               .expect(401));
         });
 
         after(function() {
-          if (thingId) {
-            return app.models.Thing.destroyById(thingId);
+          if (invoiceId) {
+            return app.models.Invoice.destroyById(invoiceId);
           }
         });
       });
@@ -481,13 +481,13 @@ describe('REST API', function() {
       // upsert
       describe('upsert', function() {
         if (_includes(user.abilities, 'update')) {
-          it('should update a teams thing', function() {
+          it('should update a teams invoice', function() {
             return logInAs(user.username)
-              .then(res => json('put', `/api/things?access_token=${res.body.id}`)
+              .then(res => json('put', `/api/invoices?access_token=${res.body.id}`)
                 .send({
                   id: 1,
-                  programId: 'A',
-                  name: 'Widget 1',
+                  storeId: 'A',
+                  invoiceNumber: 1,
                   someprop: 'someval'
                 })
                 .expect(200))
@@ -496,49 +496,49 @@ describe('REST API', function() {
                 expect(res.body).to.have.property('someprop', 'someval');
               });
           });
-          it('should not reassign a thing to another team', function() {
+          it('should not reassign a invoice to another team', function() {
             return logInAs(user.username)
-              .then(res => json('put', `/api/things?access_token=${res.body.id}`)
+              .then(res => json('put', `/api/invoices?access_token=${res.body.id}`)
                 .send({
                   id: 1,
-                  programId: 'B',
-                  name: 'Widget 1',
+                  storeId: 'B',
+                  invoiceNumber: 1,
                   someprop: 'someval'
                 })
                 .expect(401));
           });
         }
         else {
-          it('should not update a teams thing', function() {
+          it('should not update a teams invoice', function() {
             return logInAs(user.username)
-              .then(res => json('put', `/api/things?access_token=${res.body.id}`)
+              .then(res => json('put', `/api/invoices?access_token=${res.body.id}`)
                 .send({
                   id: 1,
-                  programId: 'A',
-                  name: 'Widget 1',
+                  storeId: 'A',
+                  invoiceNumber: 1,
                   someprop: 'someval'
                 })
                 .expect(401));
           });
         }
-        it('should not update another teams thing', function() {
+        it('should not update another teams invoice', function() {
           return logInAs(user.username)
-            .then(res => json('put', `/api/things?access_token=${res.body.id}`)
+            .then(res => json('put', `/api/invoices?access_token=${res.body.id}`)
               .send({
                 id: 2,
-                programId: 'A',
-                name: 'Widget 1',
+                storeId: 'A',
+                invoiceNumber: 1,
                 someprop: 'someval'
               })
               .expect(401));
         });
-        it('should not reassign another teams thing to our team', function() {
+        it('should not reassign another teams invoice to our team', function() {
           return logInAs(user.username)
-            .then(res => json('put', `/api/things?access_token=${res.body.id}`)
+            .then(res => json('put', `/api/invoices?access_token=${res.body.id}`)
               .send({
                 id: 2,
-                programId: 'A',
-                name: 'Widget 2',
+                storeId: 'A',
+                invoiceNumber: 2,
                 someprop: 'someval'
               })
               .expect(401));
@@ -549,9 +549,9 @@ describe('REST API', function() {
       // updateAttributes
       describe('updateAttributes', function() {
         if (_includes(user.abilities, 'update')) {
-          it('should update a teams thing attributes', function() {
+          it('should update a teams invoice attributes', function() {
             return logInAs(user.username)
-              .then(res => json('put', `/api/things/1?access_token=${res.body.id}`)
+              .then(res => json('put', `/api/invoices/1?access_token=${res.body.id}`)
                 .send({ someprop: 'someval' })
                 .expect(200))
               .then(res => {
@@ -559,30 +559,30 @@ describe('REST API', function() {
                 expect(res.body).to.have.property('someprop', 'someval');
               });
           });
-          it('should not reassign a thing to another team', function() {
+          it('should not reassign a invoice to another team', function() {
             return logInAs(user.username)
-              .then(res => json('put', `/api/things/1?access_token=${res.body.id}`)
-                .send({ programId: 'B' })
+              .then(res => json('put', `/api/invoices/1?access_token=${res.body.id}`)
+                .send({ storeId: 'B' })
                 .expect(401));
           });
         }
         else {
           return logInAs(user.username)
-            .then(res => json('put', `/api/things/1?access_token=${res.body.id}`)
+            .then(res => json('put', `/api/invoices/1?access_token=${res.body.id}`)
               .send({ someprop: 'someval' })
               .expect(401));
         }
 
-        it('should not update another teams thing attributes', function() {
+        it('should not update another teams invoice attributes', function() {
           return logInAs(user.username)
-            .then(res => json('put', `/api/things/2?access_token=${res.body.id}`)
+            .then(res => json('put', `/api/invoices/2?access_token=${res.body.id}`)
               .send({ someprop: 'someval' })
               .expect(401));
         });
-        it('should not reassign another teams thing to our team', function() {
+        it('should not reassign another teams invoice to our team', function() {
           return logInAs(user.username)
-            .then(res => json('put', `/api/things/2?access_token=${res.body.id}`)
-              .send({ programId: 'A' })
+            .then(res => json('put', `/api/invoices/2?access_token=${res.body.id}`)
+              .send({ storeId: 'A' })
               .expect(401));
         });
       });
@@ -591,9 +591,9 @@ describe('REST API', function() {
       // destroyById
       describe('destroyById', function() {
         if (_includes(user.abilities, 'delete')) {
-          it('should delete a teams thing', function() {
+          it('should delete a teams invoice', function() {
             return logInAs(user.username)
-              .then(res => json('delete', `/api/things/1?access_token=${res.body.id}`)
+              .then(res => json('delete', `/api/invoices/1?access_token=${res.body.id}`)
                 .expect(200))
               .then(res => {
                 expect(res.body).to.be.an('object');
@@ -602,15 +602,15 @@ describe('REST API', function() {
           });
         }
         else {
-          it('should not delete a teams thing', function() {
+          it('should not delete a teams invoice', function() {
             return logInAs(user.username)
-              .then(res => json('delete', `/api/things/1?access_token=${res.body.id}`)
+              .then(res => json('delete', `/api/invoices/1?access_token=${res.body.id}`)
                 .expect(401));
           });
         }
-        it('should not delete another teams thing', function() {
+        it('should not delete another teams invoice', function() {
           return logInAs(user.username)
-            .then(res => json('delete', `/api/things/2?access_token=${res.body.id}`)
+            .then(res => json('delete', `/api/invoices/2?access_token=${res.body.id}`)
               .expect(401));
         });
       });

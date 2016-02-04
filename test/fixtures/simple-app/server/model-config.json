@@ -34,7 +34,7 @@
     "dataSource": "db",
     "public": true
   },
-  "Program": {
+  "Store": {
     "dataSource": "db",
     "public": true
   },
@@ -42,7 +42,11 @@
     "dataSource": "db",
     "public": true
   },
-  "Thing": {
+  "Invoice": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Transaction": {
     "dataSource": "db",
     "public": true
   }

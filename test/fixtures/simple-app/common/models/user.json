@@ -18,9 +18,9 @@
   },
   "validations": [],
   "relations": {
-    "programs": {
+    "stores": {
       "type": "hasMany",
-      "model": "Program",
+      "model": "Store",
       "foreignKey": "userId",
       "through": "Team"
     }
