@@ -1,5 +1,5 @@
 {
-  "name": "loopback-component-access",
+  "name": "loopback-component-access-groups",
   "description": "Access controls for Loopback.",
   "version": "0.1.0",
   "author": {
@@ -7,7 +7,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/fullcube/loopback-component-access.git"
+    "url": "https://github.com/fullcube/loopback-component-access-groups.git"
   },
   "keywords": [
     "loopback",
@@ -16,9 +16,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/fullcube/loopback-component-access/issues"
+    "url": "https://github.com/fullcube/loopback-component-access-groups/issues"
   },
-  "homepage": "https://github.com/fullcube/loopback-component-access",
+  "homepage": "https://github.com/fullcube/loopback-component-access-groups",
   "files": [
     "lib",
     "test"

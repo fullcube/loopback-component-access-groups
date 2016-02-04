@@ -27,7 +27,7 @@ An 'access' [Operation Hook](https://docs.strongloop.com/display/public/LB/Opera
 
   ```json
   {
-    "loopback-component-access": {
+    "loopback-component-access-groups": {
       "{option}": "{value}"
     }
   }
