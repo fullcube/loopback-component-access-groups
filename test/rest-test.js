@@ -64,6 +64,28 @@ describe('REST API', function() {
 
   users.forEach(user => {
     describe(`${user.username} (User with ${user.abilities.join(', ')} permissions):`, function() {
+      // related group content
+      describe('related group content', function() {
+        if (_includes(user.abilities, 'read')) {
+          it('should fetch an invoices related transactions from the same team', function() {
+            return logInAs(user.username)
+              .then(res => json('get', `/api/invoices/1/transactions?access_token=${res.body.id}`)
+                .expect(200))
+              .then(res => {
+                expect(res.body).to.be.an('array');
+                expect(res.body).to.have.length(2);
+                expect(res.body[0]).to.have.property('id', 1);
+                expect(res.body[1]).to.have.property('id', 2);
+              });
+          });
+        }
+        it('should not fetch an invoice via a relationship from another teams transaction', function() {
+          return logInAs(user.username)
+            .then(res => json('get', `/api/transactions/3/invoice?access_token=${res.body.id}`)
+              .expect(401));
+        });
+      });
+      // end related group content
       // exists
       describe('exists', function() {
         if (_includes(user.abilities, 'read')) {
