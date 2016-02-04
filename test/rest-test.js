@@ -89,6 +89,15 @@ describe('REST API', function() {
             .then(res => json('get', `/api/things/2/exists?access_token=${res.body.id}`)
               .expect(401));
         });
+        it('should return false when checking for existance of a thing that doesnt exist', function() {
+          return logInAs(user.username)
+            .then(res => json('get', `/api/things/unknown-id/exists?access_token=${res.body.id}`)
+              .expect(200))
+            .then(res => {
+              expect(res.body).to.be.an('object');
+              expect(res.body).to.have.property('exists', false);
+            });
+        });
       });
       // end exists
 
@@ -325,6 +334,12 @@ describe('REST API', function() {
           return logInAs(user.username)
             .then(res => json('get', `/api/things/2?access_token=${res.body.id}`)
               .expect(401));
+        });
+
+        it('should return a 404 when getting a thing that doesnt exist', function() {
+          return logInAs(user.username)
+            .then(res => json('get', `/api/things/unknown-id?access_token=${res.body.id}`)
+              .expect(404));
         });
       });
       // end findById

@@ -44,13 +44,6 @@
       "principalType": "ROLE",
       "principalId": "$group:member",
       "permission": "ALLOW",
-      "property": "listPrograms"
-    },
-    {
-      "accessType": "READ",
-      "principalType": "ROLE",
-      "principalId": "$group:member",
-      "permission": "ALLOW",
       "property": "findById"
     },
     {
@@ -66,12 +59,6 @@
       "principalId": "$authenticated",
       "permission": "ALLOW",
       "property": "removeUser"
-    },
-    {
-      "accessType": "*",
-      "principalType": "ROLE",
-      "principalId": "$everyone",
-      "permission": "DENY"
     }
   ],
   "methods": {}
