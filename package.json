@@ -71,7 +71,7 @@
     "esformatter-use-strict": "2.0.2",
     "eslint": "2.0.0-rc.0",
     "eslint-config-fullcube": "https://github.com/fullcube/eslint-config-fullcube/tarball/master",
-    "eslint-config-strict": "https://github.com/fullcube/eslint-config-strict/tarball/84cf461e49efa918558d69aaa99733b65c606c2d",
+    "eslint-config-strict": "https://github.com/fullcube/eslint-config-strict/tarball/f235fa38289b17e305a65be38ff9cfdf4c1eb31c",
     "isparta": "4.0.0",
     "leasot": "3.1.2",
     "loopback-boot": "2.16.0",

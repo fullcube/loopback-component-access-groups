@@ -496,6 +496,7 @@ describe('REST API', function() {
           if (invoiceId) {
             return app.models.Invoice.destroyById(invoiceId);
           }
+          return null;
         });
       });
       // end create
@@ -589,10 +590,12 @@ describe('REST API', function() {
           });
         }
         else {
-          return logInAs(user.username)
-            .then(res => json('put', `/api/invoices/1?access_token=${res.body.id}`)
-              .send({ someprop: 'someval' })
-              .expect(401));
+          it('should update a teams invoice attributes', function() {
+            return logInAs(user.username)
+              .then(res => json('put', `/api/invoices/1?access_token=${res.body.id}`)
+                .send({ someprop: 'someval' })
+                .expect(401));
+          });
         }
 
         it('should not update another teams invoice attributes', function() {
