@@ -205,6 +205,17 @@ describe('REST API', function() {
       // find
       describe('find', function() {
         if (_includes(user.abilities, 'read')) {
+          it('should find a teams things', function() {
+            return logInAs(user.username)
+              .then(res => json('get', `/api/things?access_token=${res.body.id}`)
+                .expect(200))
+              .then(res => {
+                expect(res.body).to.be.an('array');
+                expect(res.body).to.have.length(2);
+                expect(res.body[0]).to.have.property('name', 'Widget 1');
+                expect(res.body[1]).to.have.property('name', 'Widget 3');
+              });
+          });
           it('should find a teams things by group id', function() {
             return logInAs(user.username)
               .then(res => json('get', `/api/things?filter[where][programId]=A&access_token=${res.body.id}`)
@@ -218,6 +229,15 @@ describe('REST API', function() {
           });
         }
         else {
+          it('should not find a teams things', function() {
+            return logInAs(user.username)
+              .then(res => json('get', `/api/things?access_token=${res.body.id}`)
+                .expect(200))
+              .then(res => {
+                expect(res.body).to.be.an('array');
+                expect(res.body).to.have.length(0);
+              });
+          });
           it('should not find a teams things by group id', function() {
             return logInAs(user.username)
               .then(res => json('get', `/api/things?filter[where][programId]=A&access_token=${res.body.id}`)
