@@ -1,7 +1,7 @@
 ### TODOs
 | Filename | line # | TODO
 |:------|:------:|:------
-| lib/utils.js | 48 | Only add an access observer to relevant models.
-| lib/utils.js | 65 | Remove this hack once ctx.options is passing properly (above).
-| lib/utils.js | 104 | Implement mothod to extract tenants from a where filter.
-| lib/middleware/user-context.js | 20 | instead of hardcoding XYZModel, should we be able to dynamically figure out Model to search on?
+| lib/utils.js | 138 | Should we allow the access group model to be treated as a group content model too?
+| lib/utils.js | 280 | Use promise cancellation to abort the chain early.
+| lib/utils.js | 338 | Cache this result so that it can be reused across each ACL lookup attempt.
+| lib/utils.js | 345 | Atempt to follow relationships in addition to the foreign key.

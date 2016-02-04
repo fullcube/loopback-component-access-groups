@@ -13,6 +13,28 @@ const SIMPLE_APP = path.join(__dirname, 'fixtures', 'simple-app');
 const app = require(path.join(SIMPLE_APP, 'server/server.js'));
 
 describe('Utils', function() {
+  describe('isGroupModel', function() {
+    it('should return true for a group model', function() {
+      const res = app.accessUtils.isGroupModel('Store');
+
+      expect(res).to.be.true();
+    });
+    it('should return false for a model that is not a group model', function() {
+      const res = app.accessUtils.isGroupModel('user');
+
+      expect(res).to.be.false();
+    });
+  });
+
+  describe('getGroupContentModels', function() {
+    it('should return a list of group content models', function() {
+      const groupContentModels = app.accessUtils.getGroupContentModels();
+
+      expect(groupContentModels).to.be.an('array');
+      expect(groupContentModels).to.deep.equal([ 'Invoice', 'Transaction' ]);
+    });
+  });
+
   describe('buildFilter', function() {
     it('should return a where condition that includes all groups for a user (no groups)', function() {
       return app.accessUtils.buildFilter('generalUser')

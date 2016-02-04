@@ -526,7 +526,7 @@ describe('REST API', function() {
             .then(res => json('put', `/api/invoices?access_token=${res.body.id}`)
               .send({
                 id: 2,
-                storeId: 'A',
+                storeId: 'B',
                 invoiceNumber: 1,
                 someprop: 'someval'
               })

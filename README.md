@@ -35,13 +35,13 @@ Options:
 
   [String] : The name of the model that should be used to register group access role resolvers. *(default: 'Role')*
 
-- `groupModel`
+- `accessGroupModel`
 
   [String] : The name of the model that should be used to store and check group access roles. *(default: 'AccessGroup')*
 
-- `groupModels`
+- `groupModel`
 
-  [Array] : A list of models that should be considered as group models. *(default: [ ])*
+  [String] : The model that is considered as a group. *(default: 'Group')*
 
 - `foreignKey`
 

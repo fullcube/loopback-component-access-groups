@@ -10,14 +10,15 @@
   "../../../../lib": {
     "userModel": "user",
     "roleModel": "Role",
-    "groupModel": "Team",
+    "accessGroupModel": "Team",
+    "groupModel": "Store",
     "foreignKey": "storeId",
     "accessGroups": [
       "$group:admin",
       "$group:manager",
       "$group:member"
     ],
-    "groupModels": [
+    "accessGroupModels": [
       "Invoice",
       "Transaction"
     ]
