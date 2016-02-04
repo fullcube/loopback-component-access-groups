@@ -3,7 +3,7 @@
 This loopback component enables you to add multi-tenant style access controls to a loopback application. It enables you
 to restrict access to model data based on a users roles within a specific context.
 
-# Usage
+## Usage
 
 **Installation**
 
@@ -35,37 +35,39 @@ Options:
 
   [String] : The name of the model that should be used to register group access role resolvers. *(default: 'Role')*
 
-- `accessGroupModel`
-
-  [String] : The name of the model that should be used to store and check group access roles. *(default: 'AccessGroup')*
-
 - `groupModel`
 
   [String] : The model that is considered as a group. *(default: 'Group')*
+
+- `groupAccessModel`
+
+  [String] : The name of the model that should be used to store and check group access roles. *(default: 'GroupAccess')*
+
+- `groupRoles`
+
+  [Array] : A list of group names. *(default: [ '$group:admin', '$group:member' ])*
 
 - `foreignKey`
 
   [String] : The foreign key that should be used to determine which access group a model belongs to. *(default: 'groupId')*
 
-- `accessGroups`
-
-  [Array] : A list of group names. *(default: [ '$group:admin', '$group:member' ])*
-
-# Tests
+## Tests
 
 ### Roles
 
-**everyone**
-  noinvoice
+The following group roles roles are configured in the test data.
 
-**authenticated**
-  noinvoice
+ - **everyone**  
+none
 
-**$group:admin**
-  create, read, update, delete
+ - **authenticated**  
+none
 
-**$group:manager**
-  create, read, update, delete
+ - **$group:member**  
+read
 
-**$group:member**
-  create, read, update
+ - **$group:manager**  
+create, read, update
+
+ - **$group:admin**  
+create, read, update, delete
