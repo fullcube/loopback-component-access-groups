@@ -36,20 +36,20 @@ describe('Utils', function() {
     });
   });
 
-  describe('getUserTenants', function() {
+  describe('getUserGroups', function() {
     it('should return a list of tenants for a user', function() {
-      return app.accessUtils.getUserTenants('generalUser')
+      return app.accessUtils.getUserGroups('generalUser')
         .then(tenants => {
           expect(tenants).to.be.an('array');
           expect(tenants).to.have.length(0);
-          return app.accessUtils.getUserTenants('programAdminA');
+          return app.accessUtils.getUserGroups('programAdminA');
         })
         .then(tenants => {
           expect(tenants).to.be.an('array');
           expect(tenants).to.have.length(1);
           expect(tenants[0]).to.have.property('programId', 'A');
           expect(tenants[0]).to.have.property('role', 'admin');
-          return app.accessUtils.getUserTenants('programManagerA');
+          return app.accessUtils.getUserGroups('programManagerA');
         })
         .then(tenants => {
           expect(tenants).to.be.an('array');

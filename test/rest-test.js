@@ -476,6 +476,17 @@ describe('REST API', function() {
                 expect(res.body).to.have.property('someprop', 'someval');
               });
           });
+          it('should not reassign a thing to another team', function() {
+            return logInAs(user.username)
+              .then(res => json('put', `/api/things?access_token=${res.body.id}`)
+                .send({
+                  id: 1,
+                  programId: 'B',
+                  name: 'Widget 1',
+                  someprop: 'someval'
+                })
+                .expect(401));
+          });
         }
         else {
           it('should not update a teams thing', function() {
@@ -490,7 +501,6 @@ describe('REST API', function() {
                 .expect(401));
           });
         }
-
         it('should not update another teams thing', function() {
           return logInAs(user.username)
             .then(res => json('put', `/api/things?access_token=${res.body.id}`)
@@ -498,6 +508,17 @@ describe('REST API', function() {
                 id: 2,
                 programId: 'A',
                 name: 'Widget 1',
+                someprop: 'someval'
+              })
+              .expect(401));
+        });
+        it('should not reassign another teams thing to our team', function() {
+          return logInAs(user.username)
+            .then(res => json('put', `/api/things?access_token=${res.body.id}`)
+              .send({
+                id: 2,
+                programId: 'A',
+                name: 'Widget 2',
                 someprop: 'someval'
               })
               .expect(401));
@@ -518,6 +539,12 @@ describe('REST API', function() {
                 expect(res.body).to.have.property('someprop', 'someval');
               });
           });
+          it('should not reassign a thing to another team', function() {
+            return logInAs(user.username)
+              .then(res => json('put', `/api/things/1?access_token=${res.body.id}`)
+                .send({ programId: 'B' })
+                .expect(401));
+          });
         }
         else {
           return logInAs(user.username)
@@ -530,6 +557,12 @@ describe('REST API', function() {
           return logInAs(user.username)
             .then(res => json('put', `/api/things/2?access_token=${res.body.id}`)
               .send({ someprop: 'someval' })
+              .expect(401));
+        });
+        it('should not reassign another teams thing to our team', function() {
+          return logInAs(user.username)
+            .then(res => json('put', `/api/things/2?access_token=${res.body.id}`)
+              .send({ programId: 'A' })
               .expect(401));
         });
       });
