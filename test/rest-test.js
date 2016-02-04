@@ -65,6 +65,26 @@ describe('REST API', function() {
   users.forEach(user => {
     describe(`${user.username} (User with ${user.abilities.join(', ')} permissions):`, function() {
       // related group content
+      describe('group model', function() {
+        if (_includes(user.abilities, 'read')) {
+          it('should get a teams store', function() {
+            return logInAs(user.username)
+              .then(res => json('get', `/api/stores/A?access_token=${res.body.id}`)
+                .expect(200))
+              .then(res => {
+                expect(res.body).to.be.an('object');
+                expect(res.body).to.have.property('name', 'Store A');
+              });
+          });
+        }
+        it('should not get another teams store', function() {
+          return logInAs(user.username)
+            .then(res => json('get', `/api/stores/B?access_token=${res.body.id}`)
+              .expect(401));
+        });
+      });
+
+      // related group content
       describe('related group content', function() {
         if (_includes(user.abilities, 'read')) {
           it('should fetch an invoices related transactions from the same team', function() {

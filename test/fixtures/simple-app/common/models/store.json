@@ -45,30 +45,41 @@
     {
       "accessType": "READ",
       "principalType": "ROLE",
-      "principalId": "admin",
-      "permission": "ALLOW",
-      "property": "find"
+      "principalId": "$group:member",
+      "permission": "ALLOW"
     },
     {
       "accessType": "READ",
       "principalType": "ROLE",
-      "principalId": "$group:member",
-      "permission": "ALLOW",
-      "property": "findById"
+      "principalId": "$group:manager",
+      "permission": "ALLOW"
     },
     {
-      "accessType": "EXECUTE",
+      "accessType": "WRITE",
       "principalType": "ROLE",
-      "principalId": "$authenticated",
+      "principalId": "$group:manager",
       "permission": "ALLOW",
-      "property": "addUser"
+      "property": "create"
     },
     {
-      "accessType": "EXECUTE",
+      "accessType": "WRITE",
       "principalType": "ROLE",
-      "principalId": "$authenticated",
+      "principalId": "$group:manager",
       "permission": "ALLOW",
-      "property": "removeUser"
+      "property": "updateAttributes"
+    },
+    {
+      "accessType": "WRITE",
+      "principalType": "ROLE",
+      "principalId": "$group:manager",
+      "permission": "ALLOW",
+      "property": "upsert"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$group:admin",
+      "permission": "ALLOW"
     }
   ],
   "methods": {}
