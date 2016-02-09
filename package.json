@@ -1,7 +1,7 @@
 {
   "name": "loopback-component-access-groups",
   "description": "Access controls for Loopback.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": {
     "name": "Tom Kirkpatrick @mrfelton"
   },
@@ -30,7 +30,7 @@
   "main": "./lib/index.js",
   "scripts": {
     "lint": "eslint './{lib,test}/**/*.js'",
-    "simple-app":"node test/fixtures/simple-app/server/server.js",
+    "simple-app": "node test/fixtures/simple-app/server/server.js",
     "esformatter": "esformatter -i './{lib,test}/**/*.js'",
     "pretest": "npm run esformatter ; npm run lint",
     "coverage": "cat ./coverage/lcov.info | coveralls",
