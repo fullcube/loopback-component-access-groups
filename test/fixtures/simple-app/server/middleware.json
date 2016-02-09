@@ -2,17 +2,11 @@
   "initial:before": {
     "loopback#favicon": {},
     "loopback#context": {},
-    "loopback#token": {},
-    "../../../../lib/middleware/user-context": {}
+    "loopback#token": {}
   },
   "session": {},
   "auth": {},
   "parse": {},
-  "routes:before": {
-    "../../../../lib/middleware/access-logger": {
-      "paths": "/api/*"
-    }
-  },
   "routes": {
     "loopback#rest": {
       "paths": [
