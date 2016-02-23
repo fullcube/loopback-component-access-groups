@@ -17,10 +17,6 @@
       "$group:admin",
       "$group:manager",
       "$group:member"
-    ],
-    "groupAccessModels": [
-      "Invoice",
-      "Transaction"
     ]
   }
 }
