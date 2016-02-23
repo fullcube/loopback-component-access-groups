@@ -17,6 +17,7 @@
       "$group:admin",
       "$group:manager",
       "$group:member"
-    ]
+    ],
+    "applyToStatic": true
   }
 }
