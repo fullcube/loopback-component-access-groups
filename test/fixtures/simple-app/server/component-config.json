@@ -1,7 +1,4 @@
 {
-  "loopback-component-explorer": {
-    "mountPath": "/explorer"
-  },
   "loopback-component-fixtures": {
     "loadFixturesOnStartup": true,
     "environments": [ "development", "test" ],
@@ -19,5 +16,8 @@
       "$group:member"
     ],
     "applyToStatic": true
+  },
+  "loopback-component-explorer": {
+    "mountPath": "/explorer"
   }
 }
