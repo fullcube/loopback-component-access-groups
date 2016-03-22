@@ -117,13 +117,18 @@ Options:
 
   [String] : The name of the model that should be used to store and check group access roles. *(default: 'GroupAccess')*
 
+- `foreignKey`
+
+  [String] : The foreign key that should be used to determine which access group a model belongs to. *(default: 'groupId')*
+
 - `groupRoles`
 
   [Array] : A list of group names. *(default: [ '$group:admin', '$group:member' ])*
 
-- `foreignKey`
+- `applyToStatic`
 
-  [String] : The foreign key that should be used to determine which access group a model belongs to. *(default: 'groupId')*
+  [Boolean] : Set to *true* to apply ACLs to static methods (by means of query filtering). *(default: false)*
+
 
 ## Tests
 
