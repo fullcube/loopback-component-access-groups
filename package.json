@@ -34,9 +34,9 @@
     "esformatter": "esformatter -i './{lib,test}/**/*.js'",
     "pretest": "npm run esformatter ; npm run lint",
     "coverage": "cat ./coverage/lcov.info | coveralls",
-    "quicktest": "mocha test/*test.js",
-    "test": "babel-node ./node_modules/.bin/isparta cover --report text --report lcov _mocha test/*test.js",
-    "test:watch": "npm run test -- -w",
+    "quicktest": "NODE_ENV=test mocha test/*test.js",
+    "test": "NODE_ENV=test babel-node ./node_modules/.bin/isparta cover --report text --report lcov _mocha test/*test.js",
+    "test:watch": "NODE_ENV=test npm run test -- -w",
     "outdated": "npm outdated --depth=0",
     "todo": "./node_modules/.bin/leasot {lib,test}/*.js {lib,test}/**/*.js -r markdown > TODO.md || echo Refreshed TODO.md."
   },
