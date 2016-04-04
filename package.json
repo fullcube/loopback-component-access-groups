@@ -69,7 +69,7 @@
     "esformatter-remove-trailing-commas": "1.0.1",
     "esformatter-semicolons": "1.1.2",
     "esformatter-use-strict": "2.0.2",
-    "eslint": "2.0.0-rc.0",
+    "eslint": "latest",
     "eslint-config-fullcube": "https://github.com/fullcube/eslint-config-fullcube/tarball/master",
     "eslint-config-strict": "https://github.com/fullcube/eslint-config-strict/tarball/f235fa38289b17e305a65be38ff9cfdf4c1eb31c",
     "eslint-plugin-filenames": "https://github.com/fullcube/eslint-plugin-filenames/tarball/0123c4bb0034d71cc7a04c25fd63b3ac798052a1",
