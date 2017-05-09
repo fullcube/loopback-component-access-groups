@@ -1,5 +1,5 @@
-'use strict';
+'use strict'
 
 module.exports = function invoiceCustomizer(Invoice) {
-  return Invoice;
-};
+  return Invoice
+}

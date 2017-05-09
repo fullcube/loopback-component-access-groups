@@ -1,40 +1,40 @@
-'use strict';
+'use strict'
 
-const path = require('path');
-const chai = require('chai');
-const expect = chai.expect;
-// const tbd = require('chai-tbd');
+const path = require('path')
+const chai = require('chai')
+const { expect } = chai
 
-chai.use(require('dirty-chai'));
-chai.use(require('sinon-chai'));
-require('mocha-sinon');
+chai.use(require('dirty-chai'))
+chai.use(require('sinon-chai'))
 
-const SIMPLE_APP = path.join(__dirname, 'fixtures', 'simple-app');
-const app = require(path.join(SIMPLE_APP, 'server/server.js'));
+require('mocha-sinon')
+
+const SIMPLE_APP = path.join(__dirname, 'fixtures', 'simple-app')
+const app = require(path.join(SIMPLE_APP, 'server/server.js'))
 
 describe('User Context Middleware', function() {
   describe('Without loopback context', function() {
     it('should return null', function() {
-      const currentUser = app.models.user.getCurrentUser();
+      const currentUser = app.models.user.getCurrentUser()
 
-      expect(currentUser).to.be.null();
-    });
-  });
+      expect(currentUser).to.be.null()
+    })
+  })
 
   describe('With user in loopback context', function() {
     it('should return the user', function() {
       app.loopback.runInContext(function() {
-        const loopbackContext = app.loopback.getCurrentContext();
+        const loopbackContext = app.loopback.getCurrentContext()
         const user = {
           id: 'generalUser',
           username: 'generalUser',
           password: '$2a$10$Hb5a4OK7ZK97zdziGLSYgOScOy2lRQi0Kd2RCkldxRk0hZo6Eemy6',
-          email: 'generalUser@fullcube.com'
-        };
+          email: 'generalUser@fullcube.com',
+        }
 
-        loopbackContext.set('currentUser', user);
-        expect(app.models.user.getCurrentUser()).to.equal(user);
-      });
-    });
-  });
-});
+        loopbackContext.set('currentUser', user)
+        expect(app.models.user.getCurrentUser()).to.equal(user)
+      })
+    })
+  })
+})

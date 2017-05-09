@@ -1,5 +1,5 @@
-'use strict';
+'use strict'
 
 module.exports = function storeCustomizer(Store) {
-  return Store;
-};
+  return Store
+}
