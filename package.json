@@ -38,7 +38,9 @@
     "lodash": "^4.17.4"
   },
   "peerDependencies": {
-    "loopback": "^2.25.0"
+    "loopback": "^2.25.0",
+    "loopback-context": "^3.1.0",
+    "cls-hooked": "^4.1.5"
   },
   "optionalDependencies": {
     "loopback-component-explorer": "2.3.0"
@@ -54,6 +56,8 @@
     "eslint-config-fullcube": "^2.0.2",
     "loopback": "^2.25.0",
     "loopback-boot": "^2.24.0",
+    "loopback-context": "^3.1.0",
+    "cls-hooked": "^4.1.5",
     "loopback-component-fixtures": "^1.1.0",
     "mocha": "^3.4.1",
     "mocha-sinon": "latest",

@@ -1,11 +1,15 @@
 {
-  "initial:before": {
-    "loopback#favicon": {},
-    "loopback#context": {},
-    "loopback#token": {}
+  "initial": {
+    "loopback-context#per-request": {
+      "params": {
+        "enableHttpContext": true
+      }
+    }
   },
   "session": {},
-  "auth": {},
+  "auth": {
+    "loopback#token": {}
+  },
   "parse": {},
   "routes": {
     "loopback#rest": {
