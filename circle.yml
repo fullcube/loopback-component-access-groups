@@ -1,6 +1,11 @@
 machine:
   node:
-    version: 4.2.2
+    version: 6.1.0
 test:
   post:
     - npm run coverage
+deployment:
+  master:
+    branch: master
+    commands:
+      - npm run semantic-release

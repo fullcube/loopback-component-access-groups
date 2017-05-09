@@ -1,7 +1,7 @@
 {
   "name": "loopback-component-access-groups",
   "description": "Access controls for Loopback.",
-  "version": "0.2.0",
+  "version": "0.0.0-development",
   "author": {
     "name": "Tom Kirkpatrick @mrfelton"
   },
@@ -29,7 +29,8 @@
     "test": "NODE_ENV=test nyc --reporter=lcov --reporter=text --reporter=text-summary mocha test/*test.js",
     "pretest": "npm run lint",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "simple-app": "node test/fixtures/simple-app/server/server.js"
+    "simple-app": "DEBUG=loopback:component:access* node test/fixtures/simple-app/server/server.js",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "dependencies": {
     "bluebird": "3.2.1",
@@ -43,8 +44,10 @@
     "loopback-component-explorer": "2.3.0"
   },
   "devDependencies": {
+    "@bubltechnology/customizable-commit-analyzer": "^1.0.2-0",
     "chai": "3.5.0",
     "chai-tbd": "0.1.0",
+    "condition-circle": "^1.5.0",
     "coveralls": "latest",
     "dirty-chai": "1.2.2",
     "eslint": "^2.13.1",
@@ -60,7 +63,27 @@
     "nyc": "latest",
     "sinon": "latest",
     "sinon-chai": "latest",
-    "supertest": "1.1.0",
-    "supertest-as-promised": "2.0.2"
+    "strong-error-handler": "^2.1.0",
+    "supertest": "^3.0.0",
+    "semantic-release": "^6.3.6"
+  },
+  "config": {
+    "commitTypeMap": {
+      "feat": "minor",
+      "fix": "patch",
+      "docs": "patch",
+      "style": "patch",
+      "refactor": "patch",
+      "perf": "patch",
+      "test": "patch",
+      "build": "patch",
+      "ci": "patch",
+      "chore": "patch",
+      "revert": "patch"
+    }
+  },
+  "release": {
+    "verifyConditions": "condition-circle",
+    "analyzeCommits": "@bubltechnology/customizable-commit-analyzer"
   }
 }
