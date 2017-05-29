@@ -1,9 +1,11 @@
 {
   "name": "Invoice",
   "base": "PersistedModel",
-  "idInjection": true,
   "options": {
-    "validateUpsert": true
+    "idInjection": true,
+    "validateUpsert": true,
+    "forceId": false,
+    "replaceOnPUT": false
   },
   "properties": {
     "storeId": {
@@ -59,14 +61,7 @@
       "principalType": "ROLE",
       "principalId": "$group:manager",
       "permission": "ALLOW",
-      "property": "updateAttributes"
-    },
-    {
-      "accessType": "WRITE",
-      "principalType": "ROLE",
-      "principalId": "$group:manager",
-      "permission": "ALLOW",
-      "property": "upsert"
+      "property": ["patchOrCreate", "replaceOrCreate", "replaceById", "updateOrCreate", "updateAttributes", "patchAttributes"]
     },
     {
       "accessType": "*",
