@@ -19,10 +19,6 @@
     "url": "https://github.com/fullcube/loopback-component-access-groups/issues"
   },
   "homepage": "https://github.com/fullcube/loopback-component-access-groups",
-  "files": [
-    "lib",
-    "test"
-  ],
   "directories": {
     "lib": "lib",
     "test": "test"
@@ -34,7 +30,7 @@
     "pretest": "npm run lint",
     "coverage": "cat ./coverage/lcov.info | coveralls",
     "quicktest": "mocha test/*test.js",
-    "test": "babel-node ./node_modules/.bin/isparta cover --report text --report lcov _mocha test/*test.js",
+    "test": "./node_modules/.bin/isparta cover --report text --report lcov _mocha test/*test.js",
     "test:watch": "npm run test -- -w",
     "outdated": "npm outdated --depth=0",
     "todo": "./node_modules/.bin/leasot {lib,test}/*.js {lib,test}/**/*.js -r markdown > TODO.md || echo Refreshed TODO.md."
@@ -51,8 +47,6 @@
     "loopback-component-explorer": "2.3.0"
   },
   "devDependencies": {
-    "babel-cli": "6.4.5",
-    "babel-preset-es2015": "latest",
     "chai": "3.5.0",
     "chai-tbd": "0.1.0",
     "coveralls": "latest",
@@ -72,10 +66,5 @@
     "sinon-chai": "latest",
     "supertest": "1.1.0",
     "supertest-as-promised": "2.0.2"
-  },
-  "babel": {
-    "presets": [
-      "es2015"
-    ]
   }
 }
