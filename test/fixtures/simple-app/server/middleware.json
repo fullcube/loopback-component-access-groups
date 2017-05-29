@@ -1,4 +1,11 @@
 {
+  "initial:before": {
+    "loopback#token": {
+      "params": {
+        "model": "accessToken"
+      }
+    }
+  },
   "initial": {
     "loopback-context#per-request": {
       "params": {
@@ -7,9 +14,7 @@
     }
   },
   "session": {},
-  "auth": {
-    "loopback#token": {}
-  },
+  "auth": {},
   "parse": {},
   "routes": {
     "loopback#rest": {
@@ -23,6 +28,6 @@
     "loopback#urlNotFound": {}
   },
   "final:after": {
-    "loopback#errorHandler": {}
+    "strong-error-handler": {}
   }
 }

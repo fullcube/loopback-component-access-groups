@@ -16,10 +16,7 @@
       "extended": true,
       "limit": "100kb"
     },
-    "cors": false,
-    "errorHandler": {
-      "disableStackTrace": false
-    }
+    "cors": false
   },
   "legacyExplorer": false,
   "logoutSessionsOnSensitiveChanges": true

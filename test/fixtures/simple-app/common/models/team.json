@@ -1,9 +1,11 @@
 {
   "name": "Team",
   "base": "PersistedModel",
-  "idInjection": true,
   "options": {
-    "validateUpsert": true
+    "idInjection": true,
+    "validateUpsert": true,
+    "forceId": false,
+    "replaceOnPUT": false
   },
   "properties": {
     "storeId": {

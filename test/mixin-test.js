@@ -21,6 +21,19 @@ function json(verb, url, data) {
     .expect('Content-Type', /json/)
 }
 
+/**
+ * Initialise the application for the test suite.
+ */
+before(done => {
+  function finishBoot() {
+    return done()
+  }
+  if (app.booting) {
+    return app.once('booted', finishBoot)
+  }
+  return finishBoot()
+})
+
 describe('Current User Mixin.', function() {
   describe('Smoke test', function() {
     it('should add a getCurrentUser model method', function() {
