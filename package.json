@@ -54,7 +54,6 @@
     "eslint-config-fullcube": "^2.0.2",
     "loopback": "^2.25.0",
     "loopback-boot": "^2.24.0",
-    "loopback-component-explorer": "^4.2.0",
     "loopback-component-fixtures": "^1.1.0",
     "mocha": "^3.4.1",
     "mocha-sinon": "latest",
