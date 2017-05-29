@@ -33,9 +33,9 @@
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "dependencies": {
-    "bluebird": "3.2.1",
-    "debug": "2.2.0",
-    "lodash": "4.2.1"
+    "bluebird": "^3.5.0",
+    "debug": "^2.6.8",
+    "lodash": "^4.17.4"
   },
   "peerDependencies": {
     "loopback": "^2.25.0"
@@ -45,20 +45,18 @@
   },
   "devDependencies": {
     "@bubltechnology/customizable-commit-analyzer": "^1.0.2-0",
-    "chai": "3.5.0",
+    "chai": "^3.0.0",
     "chai-tbd": "0.1.0",
     "condition-circle": "^1.5.0",
     "coveralls": "latest",
     "dirty-chai": "1.2.2",
-    "eslint": "^2.13.1",
-    "eslint-config-fullcube": "https://github.com/fullcube/eslint-config-fullcube/tarball/master",
-    "eslint-config-strict": "https://github.com/fullcube/eslint-config-strict/tarball/f235fa38289b17e305a65be38ff9cfdf4c1eb31c",
-    "eslint-plugin-filenames": "https://github.com/fullcube/eslint-plugin-filenames/tarball/0123c4bb0034d71cc7a04c25fd63b3ac798052a1",
-    "leasot": "3.1.2",
+    "eslint": "^3.19.0",
+    "eslint-config-fullcube": "^2.0.2",
     "loopback": "^2.25.0",
-    "loopback-boot": "2.16.0",
-    "loopback-component-fixtures": "0.0.6",
-    "mocha": "2.4.5",
+    "loopback-boot": "^2.24.0",
+    "loopback-component-explorer": "^4.2.0",
+    "loopback-component-fixtures": "^1.1.0",
+    "mocha": "^3.4.1",
     "mocha-sinon": "latest",
     "nyc": "latest",
     "sinon": "latest",
