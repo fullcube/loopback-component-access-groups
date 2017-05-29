@@ -37,7 +37,7 @@
     "lodash": "4.2.1"
   },
   "peerDependencies": {
-    "loopback": ">=2.25.0"
+    "loopback": "^2.25.0"
   },
   "optionalDependencies": {
     "loopback-component-explorer": "2.3.0"
@@ -52,6 +52,7 @@
     "eslint-config-strict": "https://github.com/fullcube/eslint-config-strict/tarball/f235fa38289b17e305a65be38ff9cfdf4c1eb31c",
     "eslint-plugin-filenames": "https://github.com/fullcube/eslint-plugin-filenames/tarball/0123c4bb0034d71cc7a04c25fd63b3ac798052a1",
     "leasot": "3.1.2",
+    "loopback": "^2.25.0",
     "loopback-boot": "2.16.0",
     "loopback-component-fixtures": "0.0.6",
     "mocha": "2.4.5",
