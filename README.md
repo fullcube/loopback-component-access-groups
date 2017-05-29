@@ -1,5 +1,7 @@
 # Loopback Component Group Access
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/fullcube/loopback-component-access-groups.svg)](https://greenkeeper.io/)
+
 [![Circle CI](https://circleci.com/gh/fullcube/loopback-component-access-groups.svg?style=svg)](https://circleci.com/gh/fullcube/loopback-component-access-groups) [![Dependencies](http://img.shields.io/david/fullcube/loopback-component-access-groups.svg?style=flat)](https://david-dm.org/fullcube/loopback-component-access-groups) [![Coverage Status](https://coveralls.io/repos/github/fullcube/loopback-component-access-groups/badge.svg?branch=master)](https://coveralls.io/github/fullcube/loopback-component-access-groups?branch=master)
 
 This loopback component enables you to add multi-tenant style access controls to a loopback application. It enables you to restrict access to model data based on a user's roles within a specific context.
