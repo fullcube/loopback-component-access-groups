@@ -26,14 +26,10 @@
   "main": "./lib/index.js",
   "scripts": {
     "lint": "eslint './{lib,test}/**/*.js'",
-    "simple-app": "node test/fixtures/simple-app/server/server.js",
+    "test": "NODE_ENV=test nyc --reporter=lcov --reporter=text --reporter=text-summary mocha test/*test.js",
     "pretest": "npm run lint",
-    "coverage": "cat ./coverage/lcov.info | coveralls",
-    "quicktest": "mocha test/*test.js",
-    "test": "./node_modules/.bin/isparta cover --report text --report lcov _mocha test/*test.js",
-    "test:watch": "npm run test -- -w",
-    "outdated": "npm outdated --depth=0",
-    "todo": "./node_modules/.bin/leasot {lib,test}/*.js {lib,test}/**/*.js -r markdown > TODO.md || echo Refreshed TODO.md."
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "simple-app": "node test/fixtures/simple-app/server/server.js"
   },
   "dependencies": {
     "bluebird": "3.2.1",
@@ -55,7 +51,6 @@
     "eslint-config-fullcube": "https://github.com/fullcube/eslint-config-fullcube/tarball/master",
     "eslint-config-strict": "https://github.com/fullcube/eslint-config-strict/tarball/f235fa38289b17e305a65be38ff9cfdf4c1eb31c",
     "eslint-plugin-filenames": "https://github.com/fullcube/eslint-plugin-filenames/tarball/0123c4bb0034d71cc7a04c25fd63b3ac798052a1",
-    "isparta": "4.0.0",
     "leasot": "3.1.2",
     "loopback-boot": "2.16.0",
     "loopback-component-fixtures": "0.0.6",
