@@ -47,7 +47,7 @@
   },
   "devDependencies": {
     "@bubltechnology/customizable-commit-analyzer": "^1.0.2-0",
-    "chai": "^3.0.0",
+    "chai": "^4.0.2",
     "chai-tbd": "0.1.0",
     "condition-circle": "^1.5.0",
     "coveralls": "latest",
