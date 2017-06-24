@@ -40,7 +40,7 @@
   "peerDependencies": {
     "loopback": "^2.25.0",
     "loopback-context": "^3.1.0",
-    "cls-hooked": "^4.1.5"
+    "cls-hooked": "^4.1.7"
   },
   "optionalDependencies": {
     "loopback-component-explorer": "2.3.0"
