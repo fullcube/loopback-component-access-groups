@@ -53,7 +53,7 @@
     "coveralls": "latest",
     "dirty-chai": "1.2.2",
     "eslint": "^3.19.0",
-    "eslint-config-fullcube": "^2.0.2",
+    "eslint-config-fullcube": "^3.0.0",
     "loopback": "^2.25.0",
     "loopback-boot": "^2.24.0",
     "loopback-context": "^3.1.0",
