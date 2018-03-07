@@ -56,7 +56,7 @@
     "loopback-context": "^3.1.0",
     "cls-hooked": "^4.1.5",
     "loopback-component-fixtures": "^1.1.0",
-    "mocha": "^3.4.1",
+    "mocha": "^5.0.3",
     "mocha-sinon": "latest",
     "nyc": "latest",
     "sinon": "latest",
