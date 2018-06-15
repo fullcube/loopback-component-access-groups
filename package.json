@@ -63,7 +63,7 @@
     "sinon-chai": "latest",
     "strong-error-handler": "^2.1.0",
     "supertest": "^3.0.0",
-    "semantic-release": "^6.3.6"
+    "semantic-release": "^15.5.3"
   },
   "config": {
     "commitTypeMap": {
