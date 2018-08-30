@@ -61,7 +61,7 @@
     "nyc": "latest",
     "sinon": "latest",
     "sinon-chai": "latest",
-    "strong-error-handler": "^2.1.0",
+    "strong-error-handler": "^3.2.0",
     "supertest": "^3.0.0",
     "semantic-release": "^6.3.6"
   },
