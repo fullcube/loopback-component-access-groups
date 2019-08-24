@@ -48,7 +48,7 @@
     "condition-circle": "^1.5.0",
     "coveralls": "latest",
     "dirty-chai": "2.0.1",
-    "eslint": "^4.1.0",
+    "eslint": "^6.2.2",
     "eslint-config-fullcube": "^3.0.0",
     "loopback": "^3.4.0",
     "loopback-boot": "^2.24.0",
